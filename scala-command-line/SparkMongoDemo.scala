@@ -4,13 +4,12 @@
 
 import org.apache.hadoop.conf.Configuration
 import org.apache.spark.{SparkContext, SparkConf}
-import org.apache.spark.rdd.RDD
 import org.bson.BSONObject
 import com.mongodb.BasicDBObject
 import com.mongodb.hadoop.{MongoInputFormat, MongoOutputFormat}
 import com.mongodb.hadoop.io.MongoUpdateWritable
 
-object SparkMongoKnorex extends App {
+object SparkMongoDemo extends App {
 
   override def main(args: Array[String]) {
 
@@ -45,7 +44,7 @@ object SparkMongoKnorex extends App {
     val updates = documents.mapValues(
       value => new MongoUpdateWritable(
         new BasicDBObject("_id", value.get("_id")), // Query
-        new BasicDBObject("$set", new BasicDBObject("foo", "bar")), // Update operation
+        new BasicDBObject("$set", new BasicDBObject("Michael", "Tommy")), // Update operation
         true, // Upsert
         false // Update multiple documents
       )
