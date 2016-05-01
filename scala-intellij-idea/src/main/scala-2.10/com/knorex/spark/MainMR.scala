@@ -9,12 +9,15 @@ import org.apache.spark.sql.SQLContext
 import com.mongodb.casbah.{WriteConcern => MongodbWriteConcern}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.functions.{udf, _}
+import org.apache.parquet.format._
 
 object MainMR extends App {
 
   override def main(args: Array[String]) {
 
     val t0 = System.nanoTime()
+
+
     val conf = new SparkConf()
       .setAppName("Knorex Spark MapReduce Application")
       .setMaster("local[2]")
@@ -29,10 +32,13 @@ object MainMR extends App {
       SamplingRatio -> 1.0,
       WriteConcern -> "normal")).build()
 
-        val bdDF = sqlContext.fromMongoDB(bdConfig)
+//        val bdDF = sqlContext.fromMongoDB(bdConfig)
 //    val path = "/Users/hongong/Desktop/pageview_09.json"
-//    val bdDF = sqlContext.read.json(path)
-    bdDF.select(col("widgetId"), col("time")).show()
+    val path = "/Users/hongong/Desktop/pageview_09.parquet"
+    val bdDF = sqlContext.read.parquet(path)
+//    bdDF.write.parquet("/Users/hongong/Desktop/pageview_09.parquet")
+    bdDF.show()
+
     val t1 = System.nanoTime()
     println("Elapsed time: " + (t1 - t0)/1000000000 + " seconds")
   }
