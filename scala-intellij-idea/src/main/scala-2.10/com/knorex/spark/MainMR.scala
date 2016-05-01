@@ -14,6 +14,7 @@ object MainMR extends App {
 
   override def main(args: Array[String]) {
 
+    val t0 = System.nanoTime()
     val conf = new SparkConf()
       .setAppName("Knorex Spark MapReduce Application")
       .setMaster("local[2]")
@@ -23,14 +24,16 @@ object MainMR extends App {
 
     val bdConfig = MongodbConfigBuilder(Map(
       Host -> List("localhost:27017"),
-      Database -> "brand_display_analytics",
-      Collection -> "brand_display_04_2016",
+      Database -> "analytics_04_2016",
+      Collection -> "pageview_09_fields",
       SamplingRatio -> 1.0,
       WriteConcern -> "normal")).build()
 
-    val bdDF = sqlContext.fromMongoDB(bdConfig)
-    bdDF.select(col("widgetId"), col("date")).show()
-
-    System.out.println("OK")
+        val bdDF = sqlContext.fromMongoDB(bdConfig)
+//    val path = "/Users/hongong/Desktop/pageview_09.json"
+//    val bdDF = sqlContext.read.json(path)
+    bdDF.select(col("widgetId"), col("time")).show()
+    val t1 = System.nanoTime()
+    println("Elapsed time: " + (t1 - t0)/1000000000 + " seconds")
   }
 }
