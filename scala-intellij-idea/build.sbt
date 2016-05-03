@@ -14,5 +14,8 @@ unmanagedJars in Compile ++= Seq(
 libraryDependencies ++= Seq(
   "org.apache.spark" % "spark-core_2.10" % "1.6.1",
   "org.apache.spark" % "spark-sql_2.10" % "1.6.1",
-  "org.mongodb" %% "casbah" % "3.1.1"
+  "org.mongodb" %% "casbah" % "3.1.1",
+  "com.github.scopt" %% "scopt" % "3.4.0"
 )
+
+resolvers += Resolver.sonatypeRepo("public")
