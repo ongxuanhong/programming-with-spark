@@ -9,9 +9,17 @@ object MainMR extends App {
   override def main(args: Array[String]) {
 
     val util = new CommandRunUtils()
-    val (startDate, endDate, widgetIds) = util.getInputFromParams(args)
-    println(startDate)
-    println(endDate)
+    var (startDate, endDate, widgetIds) = util.getInputFromParams(args)
     widgetIds.foreach(println)
+
+    while (startDate.isBefore(endDate)) {
+      val startEpoch = startDate.getMillis / 1000
+      val endEpoch = endDate.getMillis / 1000
+      println("Start date:" + startDate + "/Epoch:" + startEpoch)
+      println("End date:" + endDate + "/Epoch:" + endEpoch)
+
+      // Increase 1 hour
+      startDate = startDate.plusHours(1)
+    }
   }
 }

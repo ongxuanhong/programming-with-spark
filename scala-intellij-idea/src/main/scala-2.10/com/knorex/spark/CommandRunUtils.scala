@@ -10,14 +10,13 @@ import org.joda.time.format.{DateTimeFormat, DateTimeFormatter}
 
 class CommandRunUtils() {
 
-  case class RunParams(startDate: String = "", endDate: String = "", widgetIds: String = "")
+  case class RunParams(startDate: String = "", endDate: String = "", widgetIds: String = "", automated: Boolean = true)
+
   case class ConfigHourException(msg: String) extends Exception
 
   def getInputFromParams(args: Array[String]): (DateTime, DateTime, List[String]) = {
-    var debug = false
-    val currentDateTime = DateTime.now()
-    var startDate = currentDateTime.plusHours(-1).withMinuteOfHour(0).withSecondOfMinute(0).withMillisOfSecond(0)
-    var endDate = startDate.plusHours(1)
+    var startDate = new DateTime()
+    var endDate = new DateTime()
     var widgetIds = List[String]()
 
     val parser = new scopt.OptionParser[RunParams]("scopt") {
@@ -36,8 +35,16 @@ class CommandRunUtils() {
     parser.parse(args, RunParams()) match {
       case Some(config) =>
 
+        // widget ids params
         if (config.widgetIds.length() > 0) {
           widgetIds = config.widgetIds.split(",").toList
+        }
+
+        // datetime params
+        if (config.startDate.isEmpty && config.automated) {
+          val currentDateTime = DateTime.now()
+          startDate = currentDateTime.plusHours(-1).withMinuteOfHour(0).withSecondOfMinute(0).withMillisOfSecond(0)
+          endDate = startDate.plusHours(1)
         }
         if (config.startDate > config.endDate) {
           throw ConfigHourException("start date is after end date")
