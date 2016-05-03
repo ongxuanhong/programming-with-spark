@@ -15,8 +15,8 @@ class CommandRunUtils() {
   case class ConfigHourException(msg: String) extends Exception
 
   def getInputFromParams(args: Array[String]): (DateTime, DateTime, List[String]) = {
-    var startDate = new DateTime()
-    var endDate = new DateTime()
+    var startDate = DateTime.now()
+    var endDate = DateTime.now()
     var widgetIds = List[String]()
 
     val parser = new scopt.OptionParser[RunParams]("scopt") {
@@ -41,13 +41,13 @@ class CommandRunUtils() {
         }
 
         // datetime params
+        if (config.startDate > config.endDate) {
+          throw ConfigHourException("start date is after end date")
+        }
         if (config.startDate.isEmpty && config.automated) {
           val currentDateTime = DateTime.now()
           startDate = currentDateTime.plusHours(-1).withMinuteOfHour(0).withSecondOfMinute(0).withMillisOfSecond(0)
           endDate = startDate.plusHours(1)
-        }
-        if (config.startDate > config.endDate) {
-          throw ConfigHourException("start date is after end date")
         }
         else {
           startDate = DateTime.parse(config.startDate, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss"))
