@@ -22,6 +22,8 @@ object MainMR extends App {
       println("End date:" + endDate + "/Epoch:" + endEpoch)
       println("UTC date:" + utcDate + "/Epoch:" + utcEpoch)
 
+      println(ImpressionJob.getPageViewCollName())
+
       // Increase 1 hour
       startDate = startDate.plusHours(1)
     }
