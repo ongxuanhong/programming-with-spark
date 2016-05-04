@@ -1,3 +1,5 @@
+package com.knx.spark.schema
+
 /**
   * Created by hongong on 5/3/16.
   */

@@ -1,11 +1,11 @@
-package com.knorex.spark
+package com.knx.spark.utils
 
 /**
   * Created by hongong on 5/3/16.
   */
 
 import org.joda.time.DateTime
-import org.joda.time.format.{DateTimeFormat, DateTimeFormatter}
+import org.joda.time.format.DateTimeFormat
 
 
 class CommandRunUtils() {
