@@ -14,7 +14,7 @@ object MainMR extends App {
     widgetIds.foreach(println)
 
     while (startDate.isBefore(endDate)) {
-      val utcDate = startDate.toDateTime(DateTimeZone.UTC)
+      var utcDate = startDate.toDateTime(DateTimeZone.UTC)
       val utcEpoch = utcDate.getMillis / 1000
       val startEpoch = startDate.getMillis / 1000
       val endEpoch = endDate.getMillis / 1000
@@ -22,10 +22,14 @@ object MainMR extends App {
       println("End date:" + endDate + "/Epoch:" + endEpoch)
       println("UTC date:" + utcDate + "/Epoch:" + utcEpoch)
 
-      println(ImpressionJob.getPageViewCollName())
+      ImpressionJob
+        .setDate(utcDate)
+        .setWidgetIds(widgetIds)
+        .process()
 
       // Increase 1 hour
       startDate = startDate.plusHours(1)
+      utcDate = utcDate.plusHours(1)
     }
   }
 }
