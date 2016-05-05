@@ -4,5 +4,6 @@ outfile/
 target/
 tmp/
 project/
+!project/assembly.sbt
 .idea/
 
