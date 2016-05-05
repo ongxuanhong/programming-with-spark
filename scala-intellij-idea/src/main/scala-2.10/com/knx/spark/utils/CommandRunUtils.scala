@@ -10,7 +10,12 @@ import org.joda.time.format.DateTimeFormat
 
 class CommandRunUtils() {
 
-  case class RunParams(startDate: String = "", endDate: String = "", widgetIds: String = "", automated: Boolean = true)
+  case class RunParams(startDate: String = "",
+                       endDate: String = "",
+                       widgetIds: String = "",
+                       automated: Boolean = true,
+                       verbose: Boolean = false,
+                       debug: Boolean = false)
 
   case class ConfigHourException(msg: String) extends Exception
 

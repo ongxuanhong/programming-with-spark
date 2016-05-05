@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Class-Path: lib/spark-core_2.10-1.6.1.jar:lib/mongo-java-driver-3.2.2.
+ jar:lib/mongo-hadoop-core-1.5.2.jar:mongo-hadoop-spark-1.5.2.jar:$SPA
+ RK_HOME/lib/spark-assembly-1.6.1-hadoop2.6.0.jar
+Main-Class: SparkMongoDemo
+
