@@ -88,14 +88,14 @@ object ImpressionJob extends BaseJob {
     val imConf = impressionBuilder.build()
     val outConf = outBuilder.build()
 
-    // Loading collection into DataFrame by using builded configurations
+    // Loading collection into DataFrame by using buildt configurations
     val adUnitDF = sqlContext.fromMongoDB(adUnitConf).withColumn("adUnitActive", col("isActive")).withColumn("aName", col("name"))
     val adUnitLogDF = sqlContext.fromMongoDB(adUnitLogConf).withColumn("adUnitLogActive", col("isActive")).withColumn("logName", col("name"))
 
     //   process for ADS collection not implement yet.
     val adDF = sqlContext.fromMongoDB(adConf)
     val bdDF = sqlContext.fromMongoDB(bdConf)
-    val impressionDF = sqlContext.fromMongoDB(imConf, Some(ImpressionLog.schema)).filter(col("delayed") === 0)
+    val impressionDF = sqlContext.fromMongoDB(imConf).filter(col("delayed") === 0)
 
     /*
   * Processing for main widgetId
