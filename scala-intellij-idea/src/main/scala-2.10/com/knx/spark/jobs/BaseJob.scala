@@ -63,7 +63,7 @@ trait BaseJob {
 
     if (widgetIds.nonEmpty) {
       if (widgetIds.length == 1) {
-        whereClause += s" AND widgetId = $widgetIds(0) "
+        whereClause += s" AND widgetId = '" + widgetIds(0) + "'"
       }
       else {
         whereClause += " AND widgetId IN (" + widgetIds.mkString("'","','", "'") + ")"
