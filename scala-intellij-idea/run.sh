@@ -1,6 +1,6 @@
 spark-submit \
 --conf 'spark.executor.extraJavaOptions=-Dconfig.fuction.conf' \
---conf 'spark.driver.extraJavaOptions=-Dconfig.file=./production.conf' \
+--conf 'spark.driver.extraJavaOptions=-Dconfig.file=./dev.conf' \
 --conf 'spark.local.dir=/backup/spark' \
 --driver-memory 3g \
 spark_aggregate_os.jar \
