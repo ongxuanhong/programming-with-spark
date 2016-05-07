@@ -1,134 +1,181 @@
 Adunit DF
-+----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+--------------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+------------+------------+--------------------+--------------+--------+-----------+----------+----------------+-------+-----------+----------+------------+--------------------+----------+------------+---------+------+---------------+--------------------+------------+-------------+-------+------------+--------------------+
-|campaignId|fixed_width|                 key|             website|          created_by|                name|position|               rates|rotation|rates_updated_time|num_slot|  modified_on|dedicated|                 _id|available_slot|platform|code| description|adunit_class|         screen_shot|payment_source|isActive|impressions|page_views|isExchangeAdunit|section|adunit_type|screenshot|      domain|         adunit_size|migratedOn|ad_placement|publisher|macros|unique_visitors|         modified_by|testingStart|   created_on|remarks|adUnitActive|               aName|
-+----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+--------------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+------------+------------+--------------------+--------------+--------+-----------+----------+----------------+-------+-----------+----------+------------+--------------------+----------+------------+---------+------+---------------+--------------------+------------+-------------+-------+------------+--------------------+
-|      null|       true|39b14756869912b70...|http://www.todayo...|ben_attard@knorex...|Today_Online_Home...|       1|[[SGD,month,30000...|    true|        1444702551|       5|1444702551079|     20.0|538da0fb3cdeeaa33...|           5.0|    null|null|TODAY Online|     premium|//ae.brand-displa...|          null|    true|          0|  21100000|           false|   Home|         bd|      null|Today_Online|bigverticalrectangle|      null|          []|mediacorp|    []|        1300000|shweyeephyo@knore...|           0|1401790715981|       |        true|Today_Online_Home...|
-+----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+--------------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+------------+------------+--------------------+--------------+--------+-----------+----------+----------------+-------+-----------+----------+------------+--------------------+----------+------------+---------+------+---------------+--------------------+------------+-------------+-------+------------+--------------------+
-only showing top 1 row
++----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+--------------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+------------+------------+--------------------+--------------+--------+-----------+----------+----------------+---------+-----------+----------+------------------+--------------------+----------+------------+---------+------+---------------+--------------------+------------+-------------+-------+------------+--------------------+
+|campaignId|fixed_width|                 key|             website|          created_by|                name|position|               rates|rotation|rates_updated_time|num_slot|  modified_on|dedicated|                 _id|available_slot|platform|code| description|adunit_class|         screen_shot|payment_source|isActive|impressions|page_views|isExchangeAdunit|  section|adunit_type|screenshot|            domain|         adunit_size|migratedOn|ad_placement|publisher|macros|unique_visitors|         modified_by|testingStart|   created_on|remarks|adUnitActive|               aName|
++----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+--------------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+------------+------------+--------------------+--------------+--------+-----------+----------+----------------+---------+-----------+----------+------------------+--------------------+----------+------------+---------+------+---------------+--------------------+------------+-------------+-------+------------+--------------------+
+|      null|       true|39b14756869912b70...|http://www.todayo...|ben_attard@knorex...|Today_Online_Home...|       1|[[SGD,month,30000...|    true|        1444702551|       5|1444702551079|     20.0|538da0fb3cdeeaa33...|           5.0|    null|null|TODAY Online|     premium|//ae.brand-displa...|          null|    true|          0|  21100000|           false|     Home|         bd|      null|      Today_Online|bigverticalrectangle|      null|          []|mediacorp|    []|        1300000|shweyeephyo@knore...|           0|1401790715981|       |        true|Today_Online_Home...|
+|      null|       null|94cba7629e32676b9...| http://xin.msn.com/|ben_attard@knorex...|           Filmstrip|    null|                null|    true|              null|       0|1402884485016|     null|539e51853cde7736e...|           0.0|    null|null|            |     premium|                null|          null|   false|       null|      null|            null|     null|         bd|      null|              null|bigverticalrectangle|      null|          []|   xinmsn|  null|           null|ben_attard@knorex...|        null|1402884485016|       |       false|           Filmstrip|
+|      null|       null|221dc8467778b66b1...| http://xin.msn.com/|ben_attard@knorex...|     Xinmsn_Home_Top|       0|                null|    true|              null|       5|   1414744113|     null|539e7b503cde68bf7...|           3.0|    null|null|            |     premium|                null|          null|    true|       null|      null|            null|     null|         bd|      null|              null|            med-rect|      null|          []|   xinmsn|  null|           null|samantha_ker@knor...|        null|1402895184695|       |        true|     Xinmsn_Home_Top|
+|      null|       null|2007effcefa1be6ac...|   http://knorex.com|shweyeephyo@knore...|        Test Ad Unit|    null|                null|    true|              null|       0|1403521609496|     null|53a80a49e4b0dfb96...|           0.0|    null|null|            |     premium|                null|          null|   false|       null|      null|            null|         |         bd|          |        knorex.com|bigverticalrectangle|1423479137|          []|    star1|  null|           null|shweyeephyo@knore...|        null|1403521609496|       |       false|        Test Ad Unit|
+|      null|       true|9b44be6862ff2d0af...|http://www.thesta...|shweyeephyo@knore...|   MedRect LifeStyle|       0|[[USD,day,3600.0]...|    true|        1438062289|       0|1438062289794|     20.0|53bccd81e4b05273e...|           0.0|    null|null|            |     premium|                null|          null|    true|          0|  46000000|            null|Lifestyle|         bd|          |www.thestar.com.my|            med-rect|1423479137|          []|    star1|  null|        5200000|   upasna@knorex.com|        null|1404882305643|       |        true|   MedRect LifeStyle|
++----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+--------------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+------------+------------+--------------------+--------------+--------+-----------+----------+----------------+---------+-----------+----------+------------------+--------------------+----------+------------+---------+------+---------------+--------------------+------------+-------------+-------+------------+--------------------+
+only showing top 5 rows
 
 Adunit log DF
 +--------------------+--------------------+------+--------------------+--------+--------------------+----------+---------------+--------------------+
 |                name|                 _id|active|          adunit_key|isActive|           widget_id|migratedOn|adUnitLogActive|             logName|
 +--------------------+--------------------+------+--------------------+--------+--------------------+----------+---------------+--------------------+
 |Today_Online_Home...|538ef6d4dc4d2b31f...|  null|39b14756869912b70...|   false|knxad_mediacorp_2...|      null|          false|Today_Online_Home...|
+|Today_Online_Home...|53909583dc4d2b31f...|  null|39b14756869912b70...|    true|knxad_mediacorp_2...|      null|           true|Today_Online_Home...|
+|Today_Online_Home...|539b403bdc4d2b31f...|  null|39b14756869912b70...|    true|knxad_mediacorp_2...|      null|           true|Today_Online_Home...|
+|Today_Online_Home...|539b403bdc4d2b31f...|  null|39b14756869912b70...|    true|knxad_mediacorp_2...|      null|           true|Today_Online_Home...|
+|     Xinmsn_Home_Top|539e7b66dc4d2b31f...|  null|221dc8467778b66b1...|    true|knxad_xinmsn_2014...|      null|           true|     Xinmsn_Home_Top|
 +--------------------+--------------------+------+--------------------+--------+--------------------+----------+---------------+--------------------+
-only showing top 1 row
+only showing top 5 rows
 
 Ad DF
-+--------------------+----+--------------------+--------+--------------------+--------------------+--------------------+--------+----------+---------+--------------------+-------------------+--------------------+--------------------+-------------+----------+-----------------+--------------+--------------------+-----------+------+--------+--------+--------------------+----------+---------+-----+--------------+----------+----------+-------+--------------------+---------+--------------------+--------------------+-------+
-|            resource| xpo|trackInteractionTime|neverEnd|           createdBy|              tester|           thumbnail|    name|     start|test_mode|          modifiedBy|autoRefreshInterval|              adType|                 _id|devModifiedOn|testStatus|           client|resourceStatus|                code|description|ref_id|parentId|isActive|           adContent|       end|devStatus|refId|testModifiedOn| createdOn|modifiedOn| status|            proposal|publisher|           developer|             adunits|remarks|
-+--------------------+----+--------------------+--------+--------------------+--------------------+--------------------+--------+----------+---------+--------------------+-------------------+--------------------+--------------------+-------------+----------+-----------------+--------------+--------------------+-----------+------+--------+--------+--------------------+----------+---------+-----+--------------+----------+----------+-------+--------------------+---------+--------------------+--------------------+-------+
-|[[1425403830,Scre...|null|                true|   false|shweyeephyo@knore...|shweyeephyo@knore...|http://ae.brand-d...|TEST MBD|1425398400|    false|shweyeephyo@knore...|                 30|[mobile_exp_med_r...|54f5efb6e4b0c8ad3...|   1425404137|    passed|testbd-minicooper|         ready|knx_testbd_201503...|           |      |    null|    true|[[http://bd-demo....|1427817540| finished|     |    1425404333|1425403830|1427817602|expired|[[1425403830,Scre...|   testbd|shweyeephyo@knore...|[e62f279d9a29ebd4...|       |
-+--------------------+----+--------------------+--------+--------------------+--------------------+--------------------+--------+----------+---------+--------------------+-------------------+--------------------+--------------------+-------------+----------+-----------------+--------------+--------------------+-----------+------+--------+--------+--------------------+----------+---------+-----+--------------+----------+----------+-------+--------------------+---------+--------------------+--------------------+-------+
-only showing top 1 row
++--------------------+-----+--------------------+--------+--------------------+--------------------+--------------------+--------------------+----------+---------+--------------------+-------------------+--------------------+--------------------+-------------+----------+--------------------+--------------+--------------------+-----------+------+--------+--------+--------------------+----------+---------+-----+--------------+----------+----------+---------+--------------------+---------+--------------------+--------------------+-------+
+|            resource|  xpo|trackInteractionTime|neverEnd|           createdBy|              tester|           thumbnail|                name|     start|test_mode|          modifiedBy|autoRefreshInterval|              adType|                 _id|devModifiedOn|testStatus|              client|resourceStatus|                code|description|ref_id|parentId|isActive|           adContent|       end|devStatus|refId|testModifiedOn| createdOn|modifiedOn|   status|            proposal|publisher|           developer|             adunits|remarks|
++--------------------+-----+--------------------+--------+--------------------+--------------------+--------------------+--------------------+----------+---------+--------------------+-------------------+--------------------+--------------------+-------------+----------+--------------------+--------------+--------------------+-----------+------+--------+--------+--------------------+----------+---------+-----+--------------+----------+----------+---------+--------------------+---------+--------------------+--------------------+-------+
+|[[1425403830,Scre...| null|                true|   false|shweyeephyo@knore...|shweyeephyo@knore...|http://ae.brand-d...|            TEST MBD|1425398400|    false|shweyeephyo@knore...|                 30|[mobile_exp_med_r...|54f5efb6e4b0c8ad3...|   1425404137|    passed|   testbd-minicooper|         ready|knx_testbd_201503...|           |      |    null|    true|[[http://bd-demo....|1427817540| finished|     |    1425404333|1425403830|1427817602|  expired|[[1425403830,Scre...|   testbd|shweyeephyo@knore...|[e62f279d9a29ebd4...|       |
+|[[1425530893,www....|false|                true|    true| abhishek@knorex.com| abhishek@knorex.com|http://ae.brand-d...|         Amari Hotel|1425484800|    false| abhishek@knorex.com|                 30|[mobile_exp_med_r...|54f7e00de4b02040f...|   1425531019|    passed|   mediacorp-airasia|         ready|knx_mediacorp_201...|           |      |        |    true|[[http://brand-di...|         0| finished|     |    1425531044|1425530893|1448261714|published|[[1425530893,Hors...|mediacorp| abhishek@knorex.com|[bd6950d7086033fa...|       |
+|[[1425531194,www....|false|                true|    true| abhishek@knorex.com| abhishek@knorex.com|http://ae.brand-d...| Dusit BD(No Expand)|1425484800|    false|   upasna@knorex.com|                 30|[mobile_med_rect,...|54f7e13ae4b02040f...|   1425531240|    passed|         dusit-dusit|         ready|knx_mediacorp_201...|           |      |        |    true|[[http://brand-di...|         0| finished|     |    1425531439|1425531194|1448259786|published|[[1425531194,kss_...|mediacorp| abhishek@knorex.com|[425ea619db031af6...|       |
+|[[1425532313,www....| null|                true|    true| abhishek@knorex.com| abhishek@knorex.com|http://ae.brand-d...|Hotel Jen Expanda...|1425484800|    false| abhishek@knorex.com|                 30|[mobile_leaderboa...|54f7e599e4b02040f...|   1425532349|    passed|      mediacorp-audi|         ready|knx_mediacorp_201...|           |      |    null|    true|[[http://brand-di...|         0| finished|     |    1425532368|1425532313|1425534651|cancelled|[[1425532313,kss_...|mediacorp| abhishek@knorex.com|                  []|       |
+|[[1425532647,www....| null|                true|    true| abhishek@knorex.com| abhishek@knorex.com|http://ae.brand-d...| Hotel jen Mobile BD|1425484800|    false| abhishek@knorex.com|                 30|[mobile_exp_leade...|54f7e6e7e4b02040f...|   1425532676|    passed|mediacorp-marinab...|         ready|knx_mediacorp_201...|           |      |    null|    true|[[http://brand-di...|         0| finished|     |    1425532693|1425532647|1430709897|published|[[1425532647,kss_...|mediacorp| abhishek@knorex.com|[44013dd0f4199fc9...|       |
++--------------------+-----+--------------------+--------+--------------------+--------------------+--------------------+--------------------+----------+---------+--------------------+-------------------+--------------------+--------------------+-------------+----------+--------------------+--------------+--------------------+-----------+------+--------+--------+--------------------+----------+---------+-----+--------------+----------+----------+---------+--------------------+---------+--------------------+--------------------+-------+
+only showing top 5 rows
 
 Bd DF
-+--------------------+-------------+---------+-------------------+-----------+-------+--------+-------------+-------+------+----------+--------+--------------------+--------+----------+--------+----------+--------------------+-------+----+-------+-------+-------+--------------------+----+---------+--------+--------------------+----------+--------------------+--------------------+---------+--------------------+--------+--------------------+-------+--------------+-------------+-----------+--------+---------+--------------+----------+-------+----+--------------------+---------+--------+
-|trackInteractionTime|autoPublished|startDate|             tester|      start|bdClass|    type|devModifiedOn|endDate|ref_id|       end|parentId|                 url|end_date| createdOn|adaptive|migratedOn|           developer|adunits|view|remarks|serving|adOrder|            resource| xpo|sysRemark|neverEnd|           createdBy|testStatus|           thumbnail|                name|test_mode|          modifiedBy|isLegacy|                 _id| client|resourceStatus|         code|description|isActive|devStatus|testModifiedOn|modifiedOn| status| dev|            proposal|publisher|testMode|
-+--------------------+-------------+---------+-------------------+-----------+-------+--------+-------------+-------+------+----------+--------+--------------------+--------+----------+--------+----------+--------------------+-------+----+-------+-------+-------+--------------------+----+---------+--------+--------------------+----------+--------------------+--------------------+---------+--------------------+--------+--------------------+-------+--------------+-------------+-----------+--------+---------+--------------+----------+-------+----+--------------------+---------+--------+
-|                null|        false|     null|abhishek@knorex.com|1.3992192E9| normal|med-rect|   1399360826|   null|  null|1402156800|    null|http://brand-disp...|    null|1399355948|    null|      null|kencana_kesuma@kn...|     []|   0|       |   null|   null|[[1399355948,Niss...|null|         |   false|kencana_kesuma@kn...|    passed|https://ae.knorex...|Nissan - May 2014...|    false|shweyeephyo@knore...|    true|5382ec06ec0eb7ceb...|knx0998|         ready|knx_nissan_02|           |    true| finished|    1399429971|1402157041|expired|null|[[1399355948,Niss...| 9carthai|    null|
-+--------------------+-------------+---------+-------------------+-----------+-------+--------+-------------+-------+------+----------+--------+--------------------+--------+----------+--------+----------+--------------------+-------+----+-------+-------+-------+--------------------+----+---------+--------+--------------------+----------+--------------------+--------------------+---------+--------------------+--------+--------------------+-------+--------------+-------------+-----------+--------+---------+--------------+----------+-------+----+--------------------+---------+--------+
-only showing top 1 row
++--------------------+-------------+---------+--------------------+-------------+-------+--------------+-------------+-------+------+----------+--------+--------------------+--------+----------+--------+----------+--------------------+-------+----+-------+-------+-------+--------------------+----+---------+--------+--------------------+----------+--------------------+--------------------+---------+--------------------+--------+--------------------+-------+--------------+--------------------+-----------+--------+---------+--------------+----------+-------+----+--------------------+---------+--------+
+|trackInteractionTime|autoPublished|startDate|              tester|        start|bdClass|          type|devModifiedOn|endDate|ref_id|       end|parentId|                 url|end_date| createdOn|adaptive|migratedOn|           developer|adunits|view|remarks|serving|adOrder|            resource| xpo|sysRemark|neverEnd|           createdBy|testStatus|           thumbnail|                name|test_mode|          modifiedBy|isLegacy|                 _id| client|resourceStatus|                code|description|isActive|devStatus|testModifiedOn|modifiedOn| status| dev|            proposal|publisher|testMode|
++--------------------+-------------+---------+--------------------+-------------+-------+--------------+-------------+-------+------+----------+--------+--------------------+--------+----------+--------+----------+--------------------+-------+----+-------+-------+-------+--------------------+----+---------+--------+--------------------+----------+--------------------+--------------------+---------+--------------------+--------+--------------------+-------+--------------+--------------------+-----------+--------+---------+--------------+----------+-------+----+--------------------+---------+--------+
+|                null|        false|     null| abhishek@knorex.com|  1.3992192E9| normal|      med-rect|   1399360826|   null|  null|1402156800|    null|http://brand-disp...|    null|1399355948|    null|      null|kencana_kesuma@kn...|     []|   0|       |   null|   null|[[1399355948,Niss...|null|         |   false|kencana_kesuma@kn...|    passed|https://ae.knorex...|Nissan - May 2014...|    false|shweyeephyo@knore...|    true|5382ec06ec0eb7ceb...|knx0998|         ready|       knx_nissan_02|           |    true| finished|    1399429971|1402157041|expired|null|[[1399355948,Niss...| 9carthai|    null|
+|                null|        false|     null|kencana_kesuma@kn...|    1.39896E9| normal|      med-rect|   1401260341|   null|  null|1420041540|    null|http://brand-disp...|    null|1401259303|    null|      null|kencana_kesuma@kn...|     []|   0|       |   null|   null|[[1401259303,West...|null|         |   false|kencana_kesuma@kn...|    passed|https://ae.knorex...|      Western Union |    false|samantha_ker@knor...|    true|538585273cde510e8...|knx1456|         ready|       knx_wunion_01|           |    true| finished|    1401687295|1420041602|expired|null|[[1401259303,West...| inquirer|    null|
+|                null|        false|     null|shweyeephyo@knore...|  1.3352544E9| normal|custom-440x188|   1349228524|   null|  null|1366790400|    null|http://star-big.k...|    null|1349228524|    null|1423479137|shweyeephyo@knore...|     []|   0|       |   null|   null|[[1398008078,dumm...|null|         |   false|shweyeephyo@knore...|    passed|                null|ETP Carousel (Enh...|     null|shweyeephyo@knore...|    true|538707d4421aa9073...|    etp|         ready|          knx_etp_06|           |    true| finished|    1349228524|1401686064|expired|null|[[1398008078,dumm...|    star1|    null|
+|                true|         null|     null|                    |    1.43568E9| normal|  gdnbillboard|            0|   null|      |1438272000|    null|http://cdn.brand-...|    null|1435680000|    null|      null|                    |     []|   0|       |   null|     []|                  []|null|         |   false|                    |   unknown|http://ae.brand-d...|        Expandable 2|    false|                    |   false|5593914ee4b06a755...|knx0803|       pending|knxad_knx0803_201...|           |    true|  unknown|             0|1438272004|expired|null|                  []|  knx0803|    null|
+|                null|        false|     null|shweyeephyo@knore...|1.401358292E9| normal|custom-336x560|   1349725500|   null|  null|1432894292|    null|http://star-micro...|    null|1349725500|    null|1423479137|shweyeephyo@knore...|     []|   0|       |   null|   null|[[1398008078,dumm...|null|         |   false|shweyeephyo@knore...|    passed|                null|       DiGi AutoShop|     null|shweyeephyo@knore...|    true|538707d4421aa9073...|knx1166|         ready|         knx_digi_02|           |    true| finished|    1349725500|1349725500|expired|null|[[1398008078,dumm...|    star1|    null|
++--------------------+-------------+---------+--------------------+-------------+-------+--------------+-------------+-------+------+----------+--------+--------------------+--------+----------+--------+----------+--------------------+-------+----+-------+-------+-------+--------------------+----+---------+--------+--------------------+----------+--------------------+--------------------+---------+--------------------+--------+--------------------+-------+--------------+--------------------+-----------+--------+---------+--------------+----------+-------+----+--------------------+---------+--------+
+only showing top 5 rows
 
 Pageview DF
-+--------+--------------------+-------+----------+--------------------+--------------------+-------+----------------+--------------------+--------------------+-------+
-|widgetId|                 url|referer|      time|                 uid|          remoteAddr|delayed|          extras|                  os|             browser| device|
-+--------+--------------------+-------+----------+--------------------+--------------------+-------+----------------+--------------------+--------------------+-------+
-|lws_auth|czvvxqvmggsboqmso...|      1|1460160000|d27a5c88-4567-aa6...|46.137.229.74, 46...|      0|[null,null,null]|[Other,null,null,...|[Other,null,null,...|[Other]|
-+--------+--------------------+-------+----------+--------------------+--------------------+-------+----------------+--------------------+--------------------+-------+
-only showing top 1 row
-
-All kind of BD DF
-+-------------+------+-----------+
-|       bdCode|ref_id|bdPublisher|
-+-------------+------+-----------+
-|knx_nissan_02|  null|   9carthai|
-+-------------+------+-----------+
-only showing top 1 row
-
-All adunit DF
-+--------------------+--------------------+------+--------------------+--------+--------------------+----------+---------------+--------------------+----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+----------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+-----------+------------+-----------+--------------+--------+-----------+----------+----------------+-------+-----------+----------+-------+--------------------+----------+------------+---------+------+---------------+-----------------+------------+-------------+-------+------------+--------------------+
-|                name|                 _id|active|          adunit_key|isActive|           widget_id|migratedOn|adUnitLogActive|             logName|campaignId|fixed_width|                 key|             website|          created_by|                name|position|           rates|rotation|rates_updated_time|num_slot|  modified_on|dedicated|                 _id|available_slot|platform|code|description|adunit_class|screen_shot|payment_source|isActive|impressions|page_views|isExchangeAdunit|section|adunit_type|screenshot| domain|         adunit_size|migratedOn|ad_placement|publisher|macros|unique_visitors|      modified_by|testingStart|   created_on|remarks|adUnitActive|               aName|
-+--------------------+--------------------+------+--------------------+--------+--------------------+----------+---------------+--------------------+----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+----------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+-----------+------------+-----------+--------------+--------+-----------+----------+----------------+-------+-----------+----------+-------+--------------------+----------+------------+---------+------+---------------+-----------------+------------+-------------+-------+------------+--------------------+
-|asiaone_Travel_to...|54cb452d3a07560fe...|  null|3252041e63c228878...|    true|knxad_asiaone_201...|      null|           true|asiaone_Travel_to...|      null|       true|3252041e63c228878...|http://travel.asi...|samantha_ker@knor...|asiaone_Travel_to...|       3|[[SGD,cpm,30.0]]|   false|        1439784031|       5|1439784031989|     25.0|54c8a84ce4b0d9477...|           5.0|    null|null|           |     premium|           |          null|    true|          0|  35040032|            null| Travel|         bd|      null|asiaone|bigverticalrectangle|      null|          []|  asiaone|    []|        2909718|upasna@knorex.com|        null|1422436428362|       |        true|asiaone_Travel_to...|
-+--------------------+--------------------+------+--------------------+--------+--------------------+----------+---------------+--------------------+----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+----------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+-----------+------------+-----------+--------------+--------+-----------+----------+----------------+-------+-----------+----------+-------+--------------------+----------+------------+---------+------+---------------+-----------------+------------+-------------+-------+------------+--------------------+
-only showing top 1 row
-
-
-BD data other publisher
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-|            widgetId|                 url|             referer|              extras|      time|                  os| device|             browser|publisher|count|
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-|knxad_knx0136_201...|sv.brand-display.com|https://s.yimg.co...|[df580463a7243519...|1460160004|[Other,null,null,...|[Other]|[Other,null,null,...|894479745|    1|
-|knxad_knx0136_201...|sv.brand-display.com|https://s.yimg.co...|[df580463a7243519...|1460160004|[Other,null,null,...|[Other]|[Other,null,null,...|894479745|    1|
-|knxad_knx0136_201...|sv.brand-display.com|http://m.nownews....|[df580463a7243519...|1460160007|[Other,null,null,...|[Other]|[Other,null,null,...|894479745|    1|
-|knxad_knx0136_201...|sv.brand-display.com|https://s.yimg.co...|[df580463a7243519...|1460160009|[Other,null,null,...|[Other]|[Other,null,null,...|894479745|    1|
-|knxad_knx0136_201...|sv.brand-display.com|https://s.yimg.co...|[df580463a7243519...|1460160009|[Other,null,null,...|[Other]|[Other,null,null,...|894479745|    1|
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
++--------------------+----------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+-------+-------+
+|               extra|      time|                 uid|            widgetId|                 url|              extras|               agent|             referer|          remoteAddr|             browser|                  os|                 _id|      browserVersion|delayed| device|
++--------------------+----------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+-------+-------+
+|{ "guid" : "4af4d...|1460160000|ee9c727b-c6ba-60a...|knxad_knx2991_201...|sv.brand-display.com|[ea845d619a665959...|Mozilla/5.0 (iPad...|http://www.thesta...|124.82.27.100, 12...|[null,null,Other,...|[null,null,null,O...|57084600e4b03087a...|               601.1|      0|[Other]|
+|{ "guid" : "b4c62...|1460160000|c876a5de-9045-192...|knxad_knx2991_201...|sv.brand-display.com|[ea845d619a665959...|Mozilla/5.0 (Linu...|http://www.thesta...|113.210.177.161, ...|[null,null,Other,...|[null,null,null,O...|57084600e4b03087a...|              537.36|      0|[Other]|
+|{ "guid" : "256a4...|1460160000|a85aee64-171b-a4e...|knxad_knx2991_201...|sv.brand-display.com|[ea845d619a665959...|Mozilla/5.0 (Linu...|http://www.thesta...|202.67.44.20, 202...|[null,null,Other,...|[null,null,null,O...|57084600e4b03087a...|537.16 Chrome/33....|      0|[Other]|
+|{ "guid" : "5bf34...|1460160000|a6a0ebe3-d844-dfc...|knxad_knx2991_201...|sv.brand-display.com|[ea845d619a665959...|Mozilla/5.0 (iPad...|http://www.thesta...|113.210.186.52, 1...|[null,null,Other,...|[null,null,null,O...|57084600e4b03087a...|               601.1|      0|[Other]|
+|{ "guid" : "6e823...|1460160000|e72b29a0-e44c-5cc...|knxad_knx2991_201...|sv.brand-display.com|[46cae2f93231d0c5...|Mozilla/5.0 (BB10...|http://www.star2....|113.210.50.79, 11...|[null,null,Other,...|[null,null,null,O...|57084600e4b03087a...|             537.35+|      0|[Other]|
++--------------------+----------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+--------------------+-------+-------+
 only showing top 5 rows
 
-BD data main publisher
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-|            widgetId|                 url|             referer|              extras|      time|                  os| device|             browser|publisher|count|
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-|knxad_knx0136_201...|sv.brand-display.com|https://s.yimg.co...|[df580463a7243519...|1460160004|[Other,null,null,...|[Other]|[Other,null,null,...|  knx0136|    1|
-|knxad_knx0136_201...|sv.brand-display.com|https://s.yimg.co...|[df580463a7243519...|1460160004|[Other,null,null,...|[Other]|[Other,null,null,...|  knx0136|    1|
-|knxad_knx0136_201...|sv.brand-display.com|http://m.nownews....|[df580463a7243519...|1460160007|[Other,null,null,...|[Other]|[Other,null,null,...|  knx0136|    1|
-|knxad_knx0136_201...|sv.brand-display.com|https://s.yimg.co...|[df580463a7243519...|1460160009|[Other,null,null,...|[Other]|[Other,null,null,...|  knx0136|    1|
-|knxad_knx0136_201...|sv.brand-display.com|https://s.yimg.co...|[df580463a7243519...|1460160009|[Other,null,null,...|[Other]|[Other,null,null,...|  knx0136|    1|
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-only showing top 5 rows
-
-Ref ID data other publisher
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-|            widgetId|                 url|             referer|              extras|      time|                  os| device|             browser|publisher|count|
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-|knxad_cna_2016040...|sv.brand-display.com|http://www.channe...|[d06b6afb78f60c1c...|1460160001|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016040...|sv.brand-display.com|http://www.channe...|[d06b6afb78f60c1c...|1460160001|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016040...|sv.brand-display.com|http://www.channe...|[d06b6afb78f60c1c...|1460160001|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016040...|sv.brand-display.com|http://www.channe...|[d06b6afb78f60c1c...|1460160001|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016040...|sv.brand-display.com|http://www.channe...|[d06b6afb78f60c1c...|1460160002|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    2|
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-only showing top 5 rows
-
-Ref ID data main publisher
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-|            widgetId|                 url|             referer|              extras|      time|                  os| device|             browser|publisher|count|
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-|knxad_cna_2016032...|sv.brand-display.com|                null|[c495e268cc97df9d...|1460160391|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016032...|sv.brand-display.com|http://www.channe...|[c495e268cc97df9d...|1460160460|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016032...|sv.brand-display.com|                null|[c495e268cc97df9d...|1460161573|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016032...|sv.brand-display.com|http://www.channe...|[c495e268cc97df9d...|1460161800|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016032...|sv.brand-display.com|http://www.channe...|[c495e268cc97df9d...|1460161879|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-only showing top 5 rows
-
-Ref ID data DF
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-|            widgetId|                 url|             referer|              extras|      time|                  os| device|             browser|publisher|count|
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-|knxad_cna_2016040...|sv.brand-display.com|http://www.channe...|[d06b6afb78f60c1c...|1460160001|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016040...|sv.brand-display.com|http://www.channe...|[d06b6afb78f60c1c...|1460160001|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016040...|sv.brand-display.com|http://www.channe...|[d06b6afb78f60c1c...|1460160001|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016040...|sv.brand-display.com|http://www.channe...|[d06b6afb78f60c1c...|1460160001|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    1|
-|knxad_cna_2016040...|sv.brand-display.com|http://www.channe...|[d06b6afb78f60c1c...|1460160002|[Other,null,null,...|[Other]|[Other,null,null,...|      cna|    2|
-+--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+All kind of BD DF (SELECT code as bdCode, ref_id, publisher as bdPublisher FROM bd)
++--------------------+------+-----------+
+|              bdCode|ref_id|bdPublisher|
++--------------------+------+-----------+
+|       knx_nissan_02|  null|   9carthai|
+|       knx_wunion_01|  null|   inquirer|
+|          knx_etp_06|  null|      star1|
+|knxad_knx0803_201...|      |    knx0803|
+|         knx_digi_02|  null|      star1|
++--------------------+------+-----------+
 only showing top 5 rows
 
 
-Raw input DF
+All adunit DF (SELECT * FROM adunit_log INNER JOIN adunit ON adunit_key = key WHERE adUnitLogActive = true AND adUnitActive = true)
++--------------------+--------------------+------+--------------------+--------+--------------------+----------+---------------+--------------------+----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+----------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+-----------+------------+-----------+--------------+--------+-----------+----------+----------------+-------+-----------+----------+-------+--------------------+----------+------------+----------+--------------------+---------------+-------------------+------------+-------------+-------+------------+--------------------+
+|                name|                 _id|active|          adunit_key|isActive|           widget_id|migratedOn|adUnitLogActive|             logName|campaignId|fixed_width|                 key|             website|          created_by|                name|position|           rates|rotation|rates_updated_time|num_slot|  modified_on|dedicated|                 _id|available_slot|platform|code|description|adunit_class|screen_shot|payment_source|isActive|impressions|page_views|isExchangeAdunit|section|adunit_type|screenshot| domain|         adunit_size|migratedOn|ad_placement| publisher|              macros|unique_visitors|        modified_by|testingStart|   created_on|remarks|adUnitActive|               aName|
++--------------------+--------------------+------+--------------------+--------+--------------------+----------+---------------+--------------------+----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+----------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+-----------+------------+-----------+--------------+--------+-----------+----------+----------------+-------+-----------+----------+-------+--------------------+----------+------------+----------+--------------------+---------------+-------------------+------------+-------------+-------+------------+--------------------+
+|asiaone_Travel_to...|54cb452d3a07560fe...|  null|3252041e63c228878...|    true|knxad_asiaone_201...|      null|           true|asiaone_Travel_to...|      null|       true|3252041e63c228878...|http://travel.asi...|samantha_ker@knor...|asiaone_Travel_to...|       3|[[SGD,cpm,30.0]]|   false|        1439784031|       5|1439784031989|     25.0|54c8a84ce4b0d9477...|           5.0|    null|null|           |     premium|           |          null|    true|          0|  35040032|            null| Travel|         bd|      null|asiaone|bigverticalrectangle|      null|          []|   asiaone|                  []|        2909718|  upasna@knorex.com|        null|1422436428362|       |        true|asiaone_Travel_to...|
+|asiaone_Travel_to...|54cb452d3a07560fe...|  null|3252041e63c228878...|    true|knxad_airbnb_2015...|      null|           true|asiaone_Travel_to...|      null|       true|3252041e63c228878...|http://travel.asi...|samantha_ker@knor...|asiaone_Travel_to...|       3|[[SGD,cpm,30.0]]|   false|        1439784031|       5|1439784031989|     25.0|54c8a84ce4b0d9477...|           5.0|    null|null|           |     premium|           |          null|    true|          0|  35040032|            null| Travel|         bd|      null|asiaone|bigverticalrectangle|      null|          []|   asiaone|                  []|        2909718|  upasna@knorex.com|        null|1422436428362|       |        true|asiaone_Travel_to...|
+|asiaone_Travel_to...|54f3ceb1c833599f8...|  null|3252041e63c228878...|    true|knxad_asiaone_201...|      null|           true|asiaone_Travel_to...|      null|       true|3252041e63c228878...|http://travel.asi...|samantha_ker@knor...|asiaone_Travel_to...|       3|[[SGD,cpm,30.0]]|   false|        1439784031|       5|1439784031989|     25.0|54c8a84ce4b0d9477...|           5.0|    null|null|           |     premium|           |          null|    true|          0|  35040032|            null| Travel|         bd|      null|asiaone|bigverticalrectangle|      null|          []|   asiaone|                  []|        2909718|  upasna@knorex.com|        null|1422436428362|       |        true|asiaone_Travel_to...|
+|asiaone_Travel_to...|54f3ceb1c833599f8...|  null|3252041e63c228878...|    true|knxad_airbnb_2015...|      null|           true|asiaone_Travel_to...|      null|       true|3252041e63c228878...|http://travel.asi...|samantha_ker@knor...|asiaone_Travel_to...|       3|[[SGD,cpm,30.0]]|   false|        1439784031|       5|1439784031989|     25.0|54c8a84ce4b0d9477...|           5.0|    null|null|           |     premium|           |          null|    true|          0|  35040032|            null| Travel|         bd|      null|asiaone|bigverticalrectangle|      null|          []|   asiaone|                  []|        2909718|  upasna@knorex.com|        null|1422436428362|       |        true|asiaone_Travel_to...|
+|Adara_prospecting...|56f26625500ec791b...|  null|41c2635183450051e...|    true|knxad_knx0136_201...|      null|           true|Adara_prospecting...|          |       true|41c2635183450051e...|                null|   upasna@knorex.com|Adara_prospecting...|       0|              []|   false|        1459320542|       1|1459320542990|    100.0|56f2636ee4b084156...|           0.0|     web|null|           |     premium|           |              |    true|          0|         0|            true|       |         bd|      null|  ADARA|bigverticalrectangle|      null|          []|1184669746|[[click,${CLICK_U...|              0|kaushiki@knorex.com|  1458691200|1458725742917|       |        true|Adara_prospecting...|
++--------------------+--------------------+------+--------------------+--------+--------------------+----------+---------------+--------------------+----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+----------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+-----------+------------+-----------+--------------+--------+-----------+----------+----------------+-------+-----------+----------+-------+--------------------+----------+------------+----------+--------------------+---------------+-------------------+------------+-------------+-------+------------+--------------------+
+only showing top 5 rows
+
+
+BD data other publisher (SELECT widgetId, url, referer, extras, time, os, device, browser, publisher, COUNT(widgetId) AS count
+                        FROM pageview_dd INNER JOIN all_adunit_df on widgetId = widget_id
+                        GROUP BY widgetId, url, referer, extras, time, os, device, browser, publisher)
+** pageview JOIN adunit_log JOIN adunit
 +--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
 |            widgetId|                 url|             referer|              extras|      time|                  os| device|             browser|publisher|count|
 +--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
-|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[Other,null,null,...|[Other]|[Other,null,null,...|  knx2991|    1|
-|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[Other,null,null,...|[Other]|[Other,null,null,...|  knx2991|    1|
-|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[Other,null,null,...|[Other]|[Other,null,null,...|  knx2991|    1|
-|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[Other,null,null,...|[Other]|[Other,null,null,...|  knx2991|    1|
-|knxad_knx2991_201...|sv.brand-display.com|http://www.star2....|[46cae2f93231d0c5...|1460160000|[Other,null,null,...|[Other]|[Other,null,null,...|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.star2....|[46cae2f93231d0c5...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+
+BD data main publisher (SELECT widgetId, url, referer, extras, time, os, device, browser, bdPublisher AS publisher, COUNT(widgetId) AS count
+                       FROM pageview_dd INNER JOIN all_kind_bd_df on bdCode = widgetId
+                       GROUP BY widgetId, url, referer, extras, time, os, device, browser, publisher)
+** pageview JOIN bd_selected
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+|            widgetId|                 url|             referer|              extras|      time|                  os| device|             browser|publisher|count|
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.star2....|[46cae2f93231d0c5...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|  knx2991|    1|
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+
+Ref ID data other publisher (SELECT bdCode as widgetId, url, referer, extras, time, os, device, browser, publisher, COUNT(widgetId) AS count
+                            FROM pageview_dd INNER JOIN all_kind_bd_df ON widgetId = ref_id
+                            INNER JOIN all_adunit_df ON bdCode = widget_id
+                            GROUP BY widgetId, url, referer, extras, time, os, device, browser, publisher)
+** pageview JOIN bd_selected JOIN all_adunit
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+|            widgetId|                 url|             referer|              extras|      time|                  os| device|             browser|publisher|count|
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_star1_20150...|sv.brand-display.com|http://www.star2....|[46cae2f93231d0c5...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+
+
+Ref ID data main publisher (SELECT bdCode as widgetId, url, referer, extras, time, os, device, browser, publisher, COUNT(widgetId) AS count
+                           FROM pageview_dd INNER JOIN all_kind_bd_df ON widgetId = ref_id
+                           GROUP BY widgetId, url, referer, extras, time, os, device, browser, publisher)
+** pageview JOIN bd_selected JOIN all_adunit
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+|            widgetId|                 url|             referer|              extras|      time|                  os| device|             browser|publisher|count|
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160002|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    1|
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160073|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    1|
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160112|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    1|
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160113|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    1|
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160115|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    1|
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+
+Ref ID data DF (SELECT * FROM refIdDataOtherPublisher
+                UNION ALL
+                SELECT * FROM refIdDataMainPublisher)
+** prepare data for aggregation of ref_id
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+|            widgetId|                 url|             referer|              extras|      time|                  os| device|             browser|publisher|count|
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_star1_20150...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_star1_20150...|sv.brand-display.com|http://www.star2....|[46cae2f93231d0c5...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
 +--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
 only showing top 5 rows
 
-Break down os, device, browser DF
+Raw input DF (SELECT * FROM bdDataOtherPublisher
+            UNION ALL
+            SELECT * FROM bdDataMainPublisher).filter(whereClause)
+** prepare data for aggregation of widgetId
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+|            widgetId|                 url|             referer|              extras|      time|                  os| device|             browser|publisher|count|
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|[ea845d619a665959...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.star2....|[46cae2f93231d0c5...|1460160000|[null,null,null,O...|[Other]|[null,null,Other,...|    star1|    2|
++--------------------+--------------------+--------------------+--------------------+----------+--------------------+-------+--------------------+---------+-----+
+only showing top 5 rows
+
+Break down os, device, browser DF (SELECT widgetId, (time - time%3600) AS date, extras.adunit AS section, os, device, browser, publisher, COUNT(count) AS pageViewCount
+                                   FROM rawInputDF
+                                   GROUP BY "widgetId", "date", "publisher", "section", "os", "device", "browser")
+
 +--------------------+----------+---------+--------------------+--------------------+-------+--------------------+-------------+
 |            widgetId|      date|publisher|             section|                  os| device|             browser|pageViewCount|
 +--------------------+----------+---------+--------------------+--------------------+-------+--------------------+-------------+
@@ -147,7 +194,7 @@ Break down OS, device, browser Overall DF
 +--------------------+----------+---------+-------+--------------------+-------+--------------------+-------------+
 
 
-Section DF
+Section DF (why not save)
 +--------------------+----------+---------+--------------------+----+------+-------+-------------+
 |            widgetId|      date|publisher|             section|  os|device|browser|pageViewCount|
 +--------------------+----------+---------+--------------------+----+------+-------+-------------+
@@ -157,7 +204,7 @@ Section DF
 |knxad_star1_20150...|1460160000|    star1|ea845d619a665959b...|null|  null|   null|        31655|
 +--------------------+----------+---------+--------------------+----+------+-------+-------------+
 
-Overall DF
+Overall DF (why not save)
 +--------------------+----------+---------+-------+----+------+-------+-------------+
 |            widgetId|      date|publisher|section|  os|device|browser|pageViewCount|
 +--------------------+----------+---------+-------+----+------+-------+-------------+

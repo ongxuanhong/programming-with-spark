@@ -95,7 +95,7 @@ object ImpressionJob extends BaseJob {
     //   process for ADS collection not implement yet.
     val adDF = sqlContext.fromMongoDB(adConf)
     val bdDF = sqlContext.fromMongoDB(bdConf)
-    val impressionDF = sqlContext.fromMongoDB(imConf).filter(col("delayed") === 0)
+    val impressionDF = sqlContext.fromMongoDB(imConf, Some(ImpressionLog.schema)).filter(col("delayed") === 0)
 
     /*
   * Processing for main widgetId
