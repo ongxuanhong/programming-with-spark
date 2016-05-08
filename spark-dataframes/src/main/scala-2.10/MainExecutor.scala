@@ -70,6 +70,7 @@ object MainExecutor {
 //      """).show(5)
 //    df.where("CustomerName LIKE '%ana%'").show()
 //    df.filter(col("CustomerName").like("%ana%")).show()
+
 //    sqlContext.sql(
 //      """
 //        SELECT * FROM Customers
@@ -77,6 +78,7 @@ object MainExecutor {
 //      """).show()
 //    df.where("CustomerID IN (1,3,5)").show()
 //    df.filter(col("CustomerID").isin(List(1, 3, 5):_*)).show()
+
 //    sqlContext.sql(
 //      """
 //        SELECT * FROM Customers
@@ -85,5 +87,24 @@ object MainExecutor {
 //    df.where("CustomerID <> 3").show(5)
 //    df.filter(col("CustomerID") !== 3).show(5)
 //    df.filter(col("CustomerID").notEqual(3)).show(5)
+
+//    sqlContext.sql(
+//      """
+//        SELECT * FROM Customers
+//        WHERE Country='Germany'
+//        AND City='Berlin'
+//      """).show()
+//    df.where("Country='Germany' AND City='Berlin'").show()
+//    df.filter(col("Country") === "Germany" && col("City") === "Berlin").show()
+
+//    sqlContext.sql(
+//      """
+//          SELECT * FROM Customers
+//          WHERE City='Berlin'
+//          OR City='München'
+//      """).show()
+//    df.where("City='Berlin' OR City='München'").show()
+//    df.filter(col("City") === "Berlin" || col("City") === "München").show()
+
   }
 }
