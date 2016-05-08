@@ -125,6 +125,7 @@ object MainExecutor {
     selectSimple(sqlContext, df)
     whereClauseSimple(sqlContext, df)
     operatorsWhereClause(sqlContext, df)
+    othersQueries(sqlContext, df)
 
   }
 }
