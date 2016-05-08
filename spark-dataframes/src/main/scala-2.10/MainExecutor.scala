@@ -106,5 +106,12 @@ object MainExecutor {
 //    df.where("City='Berlin' OR City='München'").show()
 //    df.filter(col("City") === "Berlin" || col("City") === "München").show()
 
+//    sqlContext.sql(
+//      """
+//        SELECT * FROM Customers
+//        ORDER BY Country ASC, CustomerName DESC
+//      """).show(5)
+//    df.orderBy(col("Country").asc, col("CustomerName").desc).show(5)
+
   }
 }
