@@ -7,7 +7,7 @@ import org.apache.spark.SparkContext
 import org.apache.spark.sql.{DataFrame, SQLContext, SaveMode}
 import org.apache.spark.sql.functions._
 
-object MainExecutor {
+object SimpleQueries {
 
   def selectSimple(sqlContext: SQLContext, df: DataFrame): Unit = {
     // SELECT by sqlContext
