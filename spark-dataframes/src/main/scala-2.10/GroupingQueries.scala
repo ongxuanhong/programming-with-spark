@@ -28,7 +28,9 @@ object GroupingQueries {
 
   }
 
-  def innerJoinQueries(sqlContext: SQLContext, customersDF: DataFrame, ordersDF: DataFrame): Unit = {
+  def joinQueries(sqlContext: SQLContext, customersDF: DataFrame, ordersDF: DataFrame, employeesDF: DataFrame, suppliersDF: DataFrame): Unit = {
+
+    // Inner join, Equal join
     sqlContext.sql(
       """
         |SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
@@ -42,47 +44,71 @@ object GroupingQueries {
       .orderBy("CustomerName")
       .show()
 
-  }
+    // Left join
+    sqlContext.sql(
+      """
+        |SELECT Customers.CustomerName, Orders.OrderID
+        |FROM Customers
+        |LEFT JOIN Orders
+        |ON Customers.CustomerID=Orders.CustomerID
+        |ORDER BY Customers.CustomerName
+      """.stripMargin).show()
+    customersDF.join(ordersDF, Seq("CustomerID", "CustomerID"), "left")
+      .select("CustomerName", "OrderID")
+      .orderBy("CustomerName")
+      .show()
 
-  def leftJoinQueries(sqlContext: SQLContext, customersDF: DataFrame, ordersDF: DataFrame, employeesDF: DataFrame): Unit = {
-    //    sqlContext.sql(
-    //      """
-    //        |SELECT Customers.CustomerName, Orders.OrderID
-    //        |FROM Customers
-    //        |LEFT JOIN Orders
-    //        |ON Customers.CustomerID=Orders.CustomerID
-    //        |ORDER BY Customers.CustomerName
-    //      """.stripMargin).show()
-    //    customersDF.join(ordersDF, Seq("CustomerID", "CustomerID"), "left")
-    //      .select("CustomerName", "OrderID")
-    //      .orderBy("CustomerName")
-    //      .show()
+    // Right join
+    sqlContext.sql(
+      """
+        |SELECT Orders.OrderID, Employees.FirstName
+        |FROM Orders
+        |RIGHT JOIN Employees
+        |ON Orders.EmployeeID=Employees.EmployeeID
+        |ORDER BY Orders.OrderID
+      """.stripMargin).show(196)
+    ordersDF.join(employeesDF, ordersDF.col("EmployeeID") === employeesDF.col("EmployeeID"), "right")
+      .select(ordersDF.col("OrderID"), employeesDF.col("FirstName"))
+      .orderBy(ordersDF.col("OrderID"))
+      .show(196)
 
-    //    sqlContext.sql(
-    //      """
-    //        |SELECT Orders.OrderID, Employees.FirstName
-    //        |FROM Orders
-    //        |RIGHT JOIN Employees
-    //        |ON Orders.EmployeeID=Employees.EmployeeID
-    //        |ORDER BY Orders.OrderID
-    //      """.stripMargin).show(196)
-//    ordersDF.join(employeesDF, ordersDF.col("EmployeeID") === employeesDF.col("EmployeeID"), "right")
-//      .select(ordersDF.col("OrderID"), employeesDF.col("FirstName"))
-//      .orderBy(ordersDF.col("OrderID"))
-//      .show(196)
-
-//    sqlContext.sql(
-//      """
-//        |SELECT Customers.CustomerName, Orders.OrderID
-//        |FROM Customers
-//        |FULL OUTER JOIN Orders
-//        |ON Customers.CustomerID=Orders.CustomerID
-//        |ORDER BY Customers.CustomerName
-//      """.stripMargin).show(196)
+    // Full join
+    sqlContext.sql(
+      """
+        |SELECT Customers.CustomerName, Orders.OrderID
+        |FROM Customers
+        |FULL OUTER JOIN Orders
+        |ON Customers.CustomerID=Orders.CustomerID
+        |ORDER BY Customers.CustomerName
+      """.stripMargin).show(196)
     customersDF.join(ordersDF, customersDF.col("CustomerID").equalTo(ordersDF.col("CustomerID")), "outer")
       .select("CustomerName", "OrderID")
       .orderBy("CustomerName")
       .show(196)
+
+    // CARTESIAN JOIN or CROSS JOIN
+    ordersDF.join(customersDF).show(5)
+
+    // Union
+    sqlContext.sql(
+      """
+        |SELECT City FROM Customers
+        |UNION
+        |SELECT City FROM Suppliers
+        |ORDER BY City
+      """.stripMargin).show(5)
+    customersDF.select("City").unionAll(suppliersDF.select("City")).distinct().show(5)
+
+    // Union all with duplicates
+    sqlContext.sql(
+      """
+        |SELECT City FROM Customers
+        |UNION ALL
+        |SELECT City FROM Suppliers
+        |ORDER BY City
+      """.stripMargin).show(5)
+    customersDF.select("City").unionAll(suppliersDF.select("City")).show(5)
+
   }
 
   def main(args: Array[String]) {
@@ -114,13 +140,19 @@ object GroupingQueries {
       .option("inferSchema", "true") // Automatically infer data types
       .load("db/csv/employees.csv")
 
+    // Loading suppliers data
+    val suppliersDF = sqlContext.read
+      .format("com.databricks.spark.csv")
+      .option("header", "true") // Use first line of all files as header
+      .option("inferSchema", "true") // Automatically infer data types
+      .load("db/csv/suppliers.csv")
+
     // Let sqlContext know which table you gonna work with
     customersDF.registerTempTable("Customers")
     ordersDF.registerTempTable("Orders")
     employeesDF.registerTempTable("Employees")
+    suppliersDF.registerTempTable("Suppliers")
 
-    // selectSimple(sqlContext, customersDF)
-    //    innerJoinQueries(sqlContext, customersDF, ordersDF)
-    leftJoinQueries(sqlContext, customersDF, ordersDF, employeesDF)
+    joinQueries(sqlContext, customersDF, ordersDF, employeesDF, suppliersDF)
   }
 }
