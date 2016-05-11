@@ -4,15 +4,10 @@ package com.knx.spark.jobs
   * Created by hongong on 5/3/16.
   */
 
-import org.apache.spark.SparkContext
 import org.apache.spark.sql.SQLContext
 import org.joda.time.{DateTime, DateTimeZone}
 
 trait BaseJob {
-
-  // Initialize SparkContext
-  val sc = new SparkContext(JobSetting.sparkConf)
-  val sqlContext = new SQLContext(sc)
 
   // Initialize common attributes
   var startEpoch = 0L
@@ -24,7 +19,7 @@ trait BaseJob {
   var localDate = utcDate.withZone(DateTimeZone.forID(SERVER_TIME_ZONE))
 
   // Implement this function
-  def process(): Unit = {
+  def process(sqlContext: SQLContext): Unit = {
 
   }
 

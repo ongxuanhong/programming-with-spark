@@ -5,55 +5,38 @@ package com.knx.spark.jobs
   */
 
 import com.knx.spark.schema.ImpressionLog
-import com.mongodb.casbah.{WriteConcern => MongodbWriteConcern}
 import com.stratio.datasource.mongodb._
 import com.stratio.datasource.mongodb.config.MongodbConfig._
 import com.stratio.datasource.mongodb.config.MongodbConfigBuilder
+import com.stratio.datasource.util.Config
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.functions.{udf, _}
 
-object ImpressionJob extends BaseJob {
+object ImpressionJobTest extends BaseJob {
 
   /*
   * Default settings
   * */
 
+  def configBuilder(host: List[String], db: String, collection: String): Config = {
+    return MongodbConfigBuilder(
+        Map(Host -> host,
+        Database -> db,
+        Collection -> collection,
+        SamplingRatio -> 1.0))
+      .build()
+  }
+
   def hourTS(s: Long) = s - s % 3600
 
   val hourTs = udf(hourTS(_: Long))
 
-  // Config collection ad_unit
-  val adUnitBuilder = MongodbConfigBuilder(Map(Host -> JobSetting.configConnection,
-    Database -> JobSetting.CONFIG_DB,
-    Collection -> JobSetting.AD_UNIT_COLLECTION_NAME,
-    SamplingRatio -> 1.0))
-
-  // Config collection adunit_log
-  val adUnitLogBuilder = MongodbConfigBuilder(Map(Host -> JobSetting.configConnection,
-    Database -> JobSetting.CONFIG_DB,
-    Collection -> JobSetting.AD_UNIT_LOG_COLLECTION_NAME,
-    SamplingRatio -> 1.0))
-
-  // Config collection ads
-  val aDPublisherBuilder = MongodbConfigBuilder(
-    Map(Host -> JobSetting.configConnection,
-      Database -> JobSetting.CONFIG_DB,
-      Collection -> JobSetting.MOBILE_COLLECTION_NAME,
-      SamplingRatio -> 1.0))
-
-  // Config collection bd
-  val bDPublisherBuilder = MongodbConfigBuilder(
-    Map(Host -> JobSetting.configConnection,
-      Database -> JobSetting.CONFIG_DB,
-      Collection -> JobSetting.BD_COLLECTION_NAME,
-      SamplingRatio -> 1.0))
-
   // Build configurations
-  val adUnitConf = adUnitBuilder.build()
-  val adUnitLogConf = adUnitLogBuilder.build()
-  val adConf = aDPublisherBuilder.build()
-  val bdConf = bDPublisherBuilder.build()
+  val adUnitConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.AD_UNIT_COLLECTION_NAME)
+  val adUnitLogConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.AD_UNIT_LOG_COLLECTION_NAME)
+  val adConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.MOBILE_COLLECTION_NAME)
+  val bdConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.BD_COLLECTION_NAME)
 
 
   /*
@@ -80,22 +63,16 @@ object ImpressionJob extends BaseJob {
       UpdateFields -> Array("widgetId", "section", "date", "publisher",
         "os", "device", "browser"
       )))
+    val outConf = outBuilder.build()
 
     // Config collection pageview_dd_timestamp
-    val impressionBuilder = MongodbConfigBuilder(Map(Host -> JobSetting.rawConnection,
-      Database -> rawDB,
-      Collection -> pageViewColl))
-
-    // Build configurations
-    val imConf = impressionBuilder.build()
-    val outConf = outBuilder.build()
+    val imConf = configBuilder(JobSetting.rawConnection, rawDB, pageViewColl)
 
     // Loading collection into DataFrame by using buildt configurations
     val adUnitDF = sqlContext.fromMongoDB(adUnitConf).withColumn("adUnitActive", col("isActive")).withColumn("aName", col("name"))
     val adUnitLogDF = sqlContext.fromMongoDB(adUnitLogConf).withColumn("adUnitLogActive", col("isActive")).withColumn("logName", col("name"))
 
     //   process for ADS collection not implement yet.
-    val adDF = sqlContext.fromMongoDB(adConf)
     val bdDF = sqlContext.fromMongoDB(bdConf)
     val impressionDF = sqlContext.fromMongoDB(imConf, Some(ImpressionLog.schema)).filter(col("delayed") === 0)
 
@@ -152,20 +129,6 @@ object ImpressionJob extends BaseJob {
     val breakDownOsDeviceOverallDF = rawInputDF.select(
       col("widgetId"), hourTs(col("time")).as("date"), expr("null").as("section"), col("publisher"),
       col("os"), col("device"), col("browser"), col("count"))
-      .groupBy("widgetId", "date", "publisher", "section", "os", "device", "browser")
-      .agg(sum("count").as("pageViewCount"))
-
-
-    // TODO: enable when everything ok
-    val sectionDF = rawInputDF.select(
-      col("widgetId"), hourTs(col("time")).as("date"), coalesce(col("extras.adunit")).as("section"), col("publisher"), col("count"),
-      expr("null").as("os"), expr("null").as("device"), expr("null").as("browser"))
-      .groupBy("widgetId", "date", "publisher", "section", "os", "device", "browser")
-      .agg(sum("count").as("pageViewCount"))
-
-    val overallDF = rawInputDF.select(
-      col("widgetId"), hourTs(col("time")).as("date"), expr("null").as("section"), col("publisher"), col("count"),
-      expr("null").as("os"), expr("null").as("device"), expr("null").as("browser"))
       .groupBy("widgetId", "date", "publisher", "section", "os", "device", "browser")
       .agg(sum("count").as("pageViewCount"))
 
