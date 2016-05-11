@@ -2,10 +2,31 @@
   * Created by hongong on 5/8/16.
   */
 
-import org.apache.spark.sql.{DataFrame, SQLContext}
 import org.apache.spark.{SparkContext, _}
+import org.apache.spark.sql.{DataFrame, SQLContext}
+import org.apache.spark.sql.functions._
 
 object GroupingQueries {
+
+  def selectSimple(sqlContext: SQLContext, customersDF: DataFrame): Unit = {
+    sqlContext.sql(
+      """
+        |SELECT * FROM Customers
+        |LIMIT 5
+      """.stripMargin).show()
+    customersDF.limit(5).show()
+
+    sqlContext.sql(
+      """
+        |SELECT CustomerName AS Customer, ContactName AS Contact_Person1
+        |FROM Customers
+      """.stripMargin).show(5)
+    customersDF.withColumnRenamed("CustomerName", "Customer 2")
+      .withColumnRenamed("ContactName", "Contact Person 2")
+      .select("Customer 2", "Contact Person 2").show(5)
+    customersDF.select(col("CustomerName").alias("Customer 3"), col("ContactName").alias("Contact Person 3")).show(5)
+
+  }
 
   def joinQueries(sqlContext: SQLContext, customersDF: DataFrame, ordersDF: DataFrame, employeesDF: DataFrame, suppliersDF: DataFrame): Unit = {
 
