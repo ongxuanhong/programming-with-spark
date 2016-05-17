@@ -21,7 +21,7 @@ object ImpressionJobTest extends BaseJob {
 
   def configBuilder(host: List[String], db: String, collection: String): Config = {
     return MongodbConfigBuilder(
-        Map(Host -> host,
+      Map(Host -> host,
         Database -> db,
         Collection -> collection,
         SamplingRatio -> 1.0))
@@ -68,19 +68,28 @@ object ImpressionJobTest extends BaseJob {
     // Config collection pageview_dd_timestamp
     val imConf = configBuilder(JobSetting.rawConnection, rawDB, pageViewColl)
 
-    // Loading collection into DataFrame by using buildt configurations
-    val adUnitDF = sqlContext.fromMongoDB(adUnitConf).withColumn("adUnitActive", col("isActive")).withColumn("aName", col("name"))
-    val adUnitLogDF = sqlContext.fromMongoDB(adUnitLogConf).withColumn("adUnitLogActive", col("isActive")).withColumn("logName", col("name"))
+    // Loading ad_unit collection into DataFrame
+    val adUnitDF = sqlContext.fromMongoDB(adUnitConf)
+      .withColumnRenamed("isActive", "adUnitActive")
+      .withColumnRenamed("name", "aName")
+      .select("key", "adUnitActive", "aName", "publisher")
+
+    // Loading adunit_log collection into DataFrame
+    val adUnitLogDF = sqlContext.fromMongoDB(adUnitLogConf)
+      .withColumnRenamed("isActive", "adUnitLogActive")
+      .withColumnRenamed("name", "logName")
+      .select("adunit_key", "widget_id", "adUnitLogActive", "logName")
 
     //   process for ADS collection not implement yet.
     val bdDF = sqlContext.fromMongoDB(bdConf)
+      .withColumnRenamed("code", "bdCode")
+      .withColumnRenamed("publisher", "bdPublisher")
+      .select("bdCode", "bdPublisher", "ref_id")
     val impressionDF = sqlContext.fromMongoDB(imConf, Some(ImpressionLog.schema)).filter(col("delayed") === 0)
 
     /*
   * Processing for main widgetId
   * */
-
-    val allKindOfBdDF = bdDF.selectExpr("code as bdCode", "ref_id", "publisher as bdPublisher")
     val allAdunitDF = adUnitLogDF.join(adUnitDF, col("adunit_key") === col("key") && col("adUnitLogActive") === true && col("adUnitActive") === true)
     val bdDataOtherPublisher = impressionDF
       .join(allAdunitDF, col("widgetId") === col("widget_id"))
@@ -89,7 +98,7 @@ object ImpressionJobTest extends BaseJob {
       .agg(count(col("widgetId")).as("count"))
 
     val bdDataMainPublisher = impressionDF
-      .join(allKindOfBdDF, col("bdCode") === col("widgetId"))
+      .join(bdDF, col("bdCode") === col("widgetId"))
       .groupBy(col("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
         col("os"), col("device"), col("browser"), col("bdPublisher").as("publisher"))
       .agg(count(col("widgetId")).as("count"))
@@ -101,14 +110,14 @@ object ImpressionJobTest extends BaseJob {
   * */
 
     val refIdDataOtherPublisher = impressionDF
-      .join(allKindOfBdDF, col("ref_id") === col("widgetId"))
+      .join(bdDF, col("ref_id") === col("widgetId"))
       .join(allAdunitDF, col("bdCode") === col("widget_id"))
       .groupBy(col("bdCode").as("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
         col("os"), col("device"), col("browser"), col("publisher"))
       .agg(count(col("widgetId")).as("count"))
 
     val refIdDataMainPublisher = impressionDF
-      .join(allKindOfBdDF, col("ref_id") === col("widgetId"))
+      .join(bdDF, col("ref_id") === col("widgetId"))
       .groupBy(col("bdCode").as("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
         col("os"), col("device"), col("browser"), col("bdPublisher").as("publisher"))
       .agg(count(col("widgetId")).as("count"))
@@ -142,7 +151,7 @@ object ImpressionJobTest extends BaseJob {
 
   }
 
-  def stopProgress(sc : SparkContext): Unit = {
+  def stopProgress(sc: SparkContext): Unit = {
     sc.stop()
   }
 }
