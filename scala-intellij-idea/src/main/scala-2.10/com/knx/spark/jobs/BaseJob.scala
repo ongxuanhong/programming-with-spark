@@ -46,22 +46,25 @@ trait BaseJob {
   }
 
 
-  def getWhereClause: String = {
+  def getWhereClause(givenSection : Boolean) : String = {
     var whereClause: String = "os IS NOT NULL " +
-      "AND extras IS NOT NULL " +
       "AND browser IS NOT NULL " +
       "AND device IS NOT NULL " +
       "AND url NOT LIKE 'file%' " +
-      s"AND time >= $startEpoch AND time < $endEpoch " +
       "AND url NOT LIKE 'http://localhost%' " +
-      "AND url NOT LIKE 'https://localhost%'"
+      "AND url NOT LIKE 'https://localhost%'" +
+      s"AND time >= $startEpoch AND time < $endEpoch "
+
+    if(givenSection) {
+      whereClause += "AND section IS NOT NULL "
+    }
 
     if (widgetIds.nonEmpty) {
       if (widgetIds.length == 1) {
         whereClause += s" AND widgetId = '" + widgetIds(0) + "'"
       }
       else {
-        whereClause += " AND widgetId IN (" + widgetIds.mkString("'","','", "'") + ")"
+        whereClause += " AND widgetId IN (" + widgetIds.mkString("'", "','", "'") + ")"
       }
     }
     whereClause

@@ -247,3 +247,22 @@ All adunit DF (SELECT * FROM adunit_log INNER JOIN adunit ON adunit_key = key WH
 |Adara_prospecting...|56f26625500ec791b...|  null|41c2635183450051e...|    true|knxad_knx0136_201...|      null|           true|Adara_prospecting...|          |       true|41c2635183450051e...|                null|   upasna@knorex.com|Adara_prospecting...|       0|              []|   false|        1459320542|       1|1459320542990|    100.0|56f2636ee4b084156...|           0.0|     web|null|           |     premium|           |              |    true|          0|         0|            true|       |         bd|      null|  ADARA|bigverticalrectangle|      null|          []|1184669746|[[click,${CLICK_U...|              0|kaushiki@knorex.com|  1458691200|1458725742917|       |        true|Adara_prospecting...|
 +--------------------+--------------------+------+--------------------+--------+--------------------+----------+---------------+--------------------+----------+-----------+--------------------+--------------------+--------------------+--------------------+--------+----------------+--------+------------------+--------+-------------+---------+--------------------+--------------+--------+----+-----------+------------+-----------+--------------+--------+-----------+----------+----------------+-------+-----------+----------+-------+--------------------+----------+------------+----------+--------------------+---------------+-------------------+------------+-------------+-------+------------+--------------------+
 only showing top 5 rows
+
+
++--------------------+--------------------+--------------------+--------------------+----------+-----+------+-------+---------+-----+
+|            widgetId|                 url|             referer|             section|      time|   os|device|browser|publisher|count|
++--------------------+--------------------+--------------------+--------------------+----------+-----+------+-------+---------+-----+
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|ea845d619a665959b...|1460160000|Other| Other|  Other|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|ea845d619a665959b...|1460160000|Other| Other|  Other|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|ea845d619a665959b...|1460160000|Other| Other|  Other|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|ea845d619a665959b...|1460160000|Other| Other|  Other|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.star2....|46cae2f93231d0c5f...|1460160000|Other| Other|  Other|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|ea845d619a665959b...|1460160000|Other| Other|  Other|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|ea845d619a665959b...|1460160000|Other| Other|  Other|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|ea845d619a665959b...|1460160000|Other| Other|  Other|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|ea845d619a665959b...|1460160001|Other| Other|  Other|  knx2991|    1|
+|knxad_knx2991_201...|sv.brand-display.com|http://www.thesta...|ea845d619a665959b...|1460160001|Other| Other|  Other|  knx2991|    1|
++--------------------+--------------------+--------------------+--------------------+----------+-----+------+-------+---------+-----+
+only showing top 10 rows
+
+bdDataMainPublisher

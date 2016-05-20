@@ -33,8 +33,6 @@ object ImpressionJobTest extends BaseJob {
   val hourTs = udf(hourTS(_: Long))
 
   // Build configurations
-  val adUnitConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.AD_UNIT_COLLECTION_NAME)
-  val adUnitLogConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.AD_UNIT_LOG_COLLECTION_NAME)
   val adConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.MOBILE_COLLECTION_NAME)
   val bdConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.BD_COLLECTION_NAME)
 
@@ -67,60 +65,49 @@ object ImpressionJobTest extends BaseJob {
     // Config collection pageview_dd_timestamp
     val pageViewConf = configBuilder(JobSetting.rawConnection, rawDB, pageViewColl)
 
-    // Loading ad_unit collection into DataFrame
-    val adUnitDF = sqlContext.fromMongoDB(adUnitConf)
-      .withColumnRenamed("isActive", "adUnitActive")
-      .withColumnRenamed("name", "aName")
-      .select("key", "adUnitActive", "aName", "publisher")
-
-    // Loading adunit_log collection into DataFrame
-    val adUnitLogDF = sqlContext.fromMongoDB(adUnitLogConf)
-      .withColumnRenamed("isActive", "adUnitLogActive")
-      .withColumnRenamed("name", "logName")
-      .select("adunit_key", "widget_id", "adUnitLogActive", "logName")
-
     //   process for ADS collection not implement yet.
     val bdDF = sqlContext.fromMongoDB(bdConf)
       .withColumnRenamed("code", "bdCode")
       .withColumnRenamed("publisher", "bdPublisher")
       .select("bdCode", "bdPublisher", "ref_id")
 
-    val pageViewDF = sqlContext.fromMongoDB(pageViewConf, Some(ImpressionLog.schema)).filter(col("delayed") === 0)
+    val pageViewDF = sqlContext.fromMongoDB(pageViewConf).filter(col("delayed") === 0)
 
     /*
-  * Processing for main widgetId
+  * Processing for main widgetId and widgetId has ref_id
   * */
 
-    val bdDataMainPublisher = pageViewDF
+    val bdDataDF = pageViewDF
       .join(bdDF, col("bdCode") === col("widgetId"))
-      .groupBy(col("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
+      .groupBy(col("widgetId"), col("url"), col("referer"), col("section"), hourTs(col("time")).as("time"),
+        col("os"), col("device"), col("browser"), col("bdPublisher").as("publisher"))
+      .agg(count(col("widgetId")).as("count"))
+      .where(getWhereClause(true))
+
+    val bdOverallDataDF = pageViewDF
+      .join(bdDF, col("bdCode") === col("widgetId"))
+      .groupBy(col("widgetId"), col("url"), col("referer"), expr("null").as("section"), hourTs(col("time")).as("time"),
         col("os"), col("device"), col("browser"), col("bdPublisher").as("publisher"))
       .agg(count(col("widgetId")).as("count"))
 
-
-    /*
-  * Processing for widget has ref_id
-  *
-  * */
-
-    val refIdDataDF = pageViewDF
+    val refIdOverallDataDF = pageViewDF
       .join(bdDF, col("ref_id") === col("widgetId"))
-      .groupBy(col("bdCode").as("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
+      .groupBy(col("bdCode").as("widgetId"), col("url"), col("referer"), expr("null").as("section"), hourTs(col("time")).as("time"),
         col("os"), col("device"), col("browser"), col("bdPublisher").as("publisher"))
       .agg(count(col("widgetId")).as("count"))
 
-    val rawInputDF = bdDataMainPublisher
-      .unionAll(refIdDataDF)
-      .where(getWhereClause)
+    val rawInputDF = bdOverallDataDF
+      .unionAll(refIdOverallDataDF)
+      .where(getWhereClause(false))
 
-    val breakDownOsDeviceDF = rawInputDF.select(
-      col("widgetId"), hourTs(col("time")).as("date"), col("extras.adunit").as("section"), col("publisher"),
+    val breakDownOsDeviceDF = bdDataDF.select(
+      col("widgetId"), col("time").as("date"), col("section"), col("publisher"),
       col("os"), col("device"), col("browser"), col("count"))
       .groupBy("widgetId", "date", "publisher", "section", "os", "device", "browser")
       .agg(sum("count").as("pageViewCount"))
 
     val breakDownOsDeviceOverallDF = rawInputDF.select(
-      col("widgetId"), hourTs(col("time")).as("date"), expr("null").as("section"), col("publisher"),
+      col("widgetId"), col("time").as("date"), col("section"), col("publisher"),
       col("os"), col("device"), col("browser"), col("count"))
       .groupBy("widgetId", "date", "publisher", "section", "os", "device", "browser")
       .agg(sum("count").as("pageViewCount"))
