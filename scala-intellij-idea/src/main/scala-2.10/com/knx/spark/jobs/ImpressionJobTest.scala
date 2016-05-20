@@ -55,15 +55,14 @@ object ImpressionJobTest extends BaseJob {
     println("Out collection : %s".format(outColl))
 
     // Config collection brand_display_mm_yyyy
-    val outBuilder = MongodbConfigBuilder(Map(Host -> JobSetting.outConnection,
+    val outConf = MongodbConfigBuilder(Map(Host -> JobSetting.outConnection,
       Database -> JobSetting.OUT_STATISTICS_DB,
       Collection -> outColl,
       WriteConcern -> "safe",
       SamplingRatio -> 1.0,
       UpdateFields -> Array("widgetId", "section", "date", "publisher",
         "os", "device", "browser"
-      )))
-    val outConf = outBuilder.build()
+      ))).build()
 
     // Config collection pageview_dd_timestamp
     val imConf = configBuilder(JobSetting.rawConnection, rawDB, pageViewColl)

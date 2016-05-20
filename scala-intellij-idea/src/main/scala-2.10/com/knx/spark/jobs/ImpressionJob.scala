@@ -5,10 +5,10 @@ package com.knx.spark.jobs
   */
 
 import com.knx.spark.schema.ImpressionLog
-import com.mongodb.casbah.{WriteConcern => MongodbWriteConcern}
 import com.stratio.datasource.mongodb._
 import com.stratio.datasource.mongodb.config.MongodbConfig._
 import com.stratio.datasource.mongodb.config.MongodbConfigBuilder
+import com.stratio.datasource.util.Config
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.functions.{udf, _}
@@ -19,41 +19,24 @@ object ImpressionJob extends BaseJob {
   * Default settings
   * */
 
+  def configBuilder(host: List[String], db: String, collection: String): Config = {
+    return MongodbConfigBuilder(
+      Map(Host -> host,
+        Database -> db,
+        Collection -> collection,
+        SamplingRatio -> 1.0))
+      .build()
+  }
+
   def hourTS(s: Long) = s - s % 3600
 
   val hourTs = udf(hourTS(_: Long))
 
-  // Config collection ad_unit
-  val adUnitBuilder = MongodbConfigBuilder(Map(Host -> JobSetting.configConnection,
-    Database -> JobSetting.CONFIG_DB,
-    Collection -> JobSetting.AD_UNIT_COLLECTION_NAME,
-    SamplingRatio -> 1.0))
-
-  // Config collection adunit_log
-  val adUnitLogBuilder = MongodbConfigBuilder(Map(Host -> JobSetting.configConnection,
-    Database -> JobSetting.CONFIG_DB,
-    Collection -> JobSetting.AD_UNIT_LOG_COLLECTION_NAME,
-    SamplingRatio -> 1.0))
-
-  // Config collection ads
-  val aDPublisherBuilder = MongodbConfigBuilder(
-    Map(Host -> JobSetting.configConnection,
-      Database -> JobSetting.CONFIG_DB,
-      Collection -> JobSetting.MOBILE_COLLECTION_NAME,
-      SamplingRatio -> 1.0))
-
-  // Config collection bd
-  val bDPublisherBuilder = MongodbConfigBuilder(
-    Map(Host -> JobSetting.configConnection,
-      Database -> JobSetting.CONFIG_DB,
-      Collection -> JobSetting.BD_COLLECTION_NAME,
-      SamplingRatio -> 1.0))
-
   // Build configurations
-  val adUnitConf = adUnitBuilder.build()
-  val adUnitLogConf = adUnitLogBuilder.build()
-  val adConf = aDPublisherBuilder.build()
-  val bdConf = bDPublisherBuilder.build()
+  val adUnitConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.AD_UNIT_COLLECTION_NAME)
+  val adUnitLogConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.AD_UNIT_LOG_COLLECTION_NAME)
+  val adConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.MOBILE_COLLECTION_NAME)
+  val bdConf = configBuilder(JobSetting.configConnection, JobSetting.CONFIG_DB, JobSetting.BD_COLLECTION_NAME)
 
 
   /*
@@ -72,38 +55,40 @@ object ImpressionJob extends BaseJob {
     println("Out collection : %s".format(outColl))
 
     // Config collection brand_display_mm_yyyy
-    val outBuilder = MongodbConfigBuilder(Map(Host -> JobSetting.outConnection,
+    val outConf = MongodbConfigBuilder(Map(Host -> JobSetting.outConnection,
       Database -> JobSetting.OUT_STATISTICS_DB,
       Collection -> outColl,
       WriteConcern -> "safe",
       SamplingRatio -> 1.0,
       UpdateFields -> Array("widgetId", "section", "date", "publisher",
         "os", "device", "browser"
-      )))
+      ))).build()
 
     // Config collection pageview_dd_timestamp
-    val impressionBuilder = MongodbConfigBuilder(Map(Host -> JobSetting.rawConnection,
-      Database -> rawDB,
-      Collection -> pageViewColl))
+    val pageViewConf = configBuilder(JobSetting.rawConnection, rawDB, pageViewColl)
 
-    // Build configurations
-    val imConf = impressionBuilder.build()
-    val outConf = outBuilder.build()
+    // Loading ad_unit collection into DataFrame
+    val adUnitDF = sqlContext.fromMongoDB(adUnitConf)
+      .withColumnRenamed("isActive", "adUnitActive")
+      .withColumnRenamed("name", "aName")
+      .select("key", "adUnitActive", "aName", "publisher")
 
-    // Loading collection into DataFrame by using buildt configurations
-    val adUnitDF = sqlContext.fromMongoDB(adUnitConf).withColumn("adUnitActive", col("isActive")).withColumn("aName", col("name"))
-    val adUnitLogDF = sqlContext.fromMongoDB(adUnitLogConf).withColumn("adUnitLogActive", col("isActive")).withColumn("logName", col("name"))
+    // Loading adunit_log collection into DataFrame
+    val adUnitLogDF = sqlContext.fromMongoDB(adUnitLogConf)
+      .withColumnRenamed("isActive", "adUnitLogActive")
+      .withColumnRenamed("name", "logName")
+      .select("adunit_key", "widget_id", "adUnitLogActive", "logName")
 
     //   process for ADS collection not implement yet.
-    val adDF = sqlContext.fromMongoDB(adConf)
     val bdDF = sqlContext.fromMongoDB(bdConf)
-    val impressionDF = sqlContext.fromMongoDB(imConf, Some(ImpressionLog.schema)).filter(col("delayed") === 0)
+      .withColumnRenamed("code", "bdCode")
+      .withColumnRenamed("publisher", "bdPublisher")
+      .select("bdCode", "bdPublisher", "ref_id")
+    val impressionDF = sqlContext.fromMongoDB(pageViewConf, Some(ImpressionLog.schema)).filter(col("delayed") === 0)
 
     /*
   * Processing for main widgetId
   * */
-
-    val allKindOfBdDF = bdDF.selectExpr("code as bdCode", "ref_id", "publisher as bdPublisher")
     val allAdunitDF = adUnitLogDF.join(adUnitDF, col("adunit_key") === col("key") && col("adUnitLogActive") === true && col("adUnitActive") === true)
     val bdDataOtherPublisher = impressionDF
       .join(allAdunitDF, col("widgetId") === col("widget_id"))
@@ -112,7 +97,7 @@ object ImpressionJob extends BaseJob {
       .agg(count(col("widgetId")).as("count"))
 
     val bdDataMainPublisher = impressionDF
-      .join(allKindOfBdDF, col("bdCode") === col("widgetId"))
+      .join(bdDF, col("bdCode") === col("widgetId"))
       .groupBy(col("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
         col("os"), col("device"), col("browser"), col("bdPublisher").as("publisher"))
       .agg(count(col("widgetId")).as("count"))
@@ -124,14 +109,14 @@ object ImpressionJob extends BaseJob {
   * */
 
     val refIdDataOtherPublisher = impressionDF
-      .join(allKindOfBdDF, col("ref_id") === col("widgetId"))
+      .join(bdDF, col("ref_id") === col("widgetId"))
       .join(allAdunitDF, col("bdCode") === col("widget_id"))
       .groupBy(col("bdCode").as("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
         col("os"), col("device"), col("browser"), col("publisher"))
       .agg(count(col("widgetId")).as("count"))
 
     val refIdDataMainPublisher = impressionDF
-      .join(allKindOfBdDF, col("ref_id") === col("widgetId"))
+      .join(bdDF, col("ref_id") === col("widgetId"))
       .groupBy(col("bdCode").as("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
         col("os"), col("device"), col("browser"), col("bdPublisher").as("publisher"))
       .agg(count(col("widgetId")).as("count"))
@@ -155,20 +140,6 @@ object ImpressionJob extends BaseJob {
       .groupBy("widgetId", "date", "publisher", "section", "os", "device", "browser")
       .agg(sum("count").as("pageViewCount"))
 
-
-    // TODO: enable when everything ok
-    val sectionDF = rawInputDF.select(
-      col("widgetId"), hourTs(col("time")).as("date"), coalesce(col("extras.adunit")).as("section"), col("publisher"), col("count"),
-      expr("null").as("os"), expr("null").as("device"), expr("null").as("browser"))
-      .groupBy("widgetId", "date", "publisher", "section", "os", "device", "browser")
-      .agg(sum("count").as("pageViewCount"))
-
-    val overallDF = rawInputDF.select(
-      col("widgetId"), hourTs(col("time")).as("date"), expr("null").as("section"), col("publisher"), col("count"),
-      expr("null").as("os"), expr("null").as("device"), expr("null").as("browser"))
-      .groupBy("widgetId", "date", "publisher", "section", "os", "device", "browser")
-      .agg(sum("count").as("pageViewCount"))
-
     //    get columns to order when union all
     val columns = breakDownOsDeviceOverallDF.columns.toSet.intersect(breakDownOsDeviceDF.columns.toSet).map(col).toSeq
     val breakDownDF = breakDownOsDeviceOverallDF.select(columns: _*).unionAll(breakDownOsDeviceDF.select(columns: _*))
@@ -179,7 +150,7 @@ object ImpressionJob extends BaseJob {
 
   }
 
-  def stopProgress(sc : SparkContext): Unit = {
+  def stopProgress(sc: SparkContext): Unit = {
     sc.stop()
   }
 }

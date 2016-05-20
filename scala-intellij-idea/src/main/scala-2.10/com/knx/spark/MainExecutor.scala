@@ -4,7 +4,7 @@ package com.knx.spark
   * Created by hongong on 4/29/16.
   */
 
-import com.knx.spark.jobs.{ImpressionJob, ImpressionJobTest, JobSetting}
+import com.knx.spark.jobs.{ImpressionJobTest, JobSetting}
 import com.knx.spark.utils.CommandRunUtils
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.SQLContext
