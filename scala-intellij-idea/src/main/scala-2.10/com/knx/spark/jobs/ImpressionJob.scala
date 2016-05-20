@@ -122,7 +122,7 @@ object ImpressionJob extends BaseJob {
       .agg(count(col("widgetId")).as("count"))
 
     val refIdDataDF = refIdDataOtherPublisher.unionAll(refIdDataMainPublisher)
-    val whereClause: String = getWhereClause(false)
+    val whereClause: String = getWhereClauseWithSection()
 
     val rawInputDF = bdDataOtherPublisher.unionAll(bdDataMainPublisher)
       .unionAll(refIdDataDF)
