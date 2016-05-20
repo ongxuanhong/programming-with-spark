@@ -65,7 +65,7 @@ object ImpressionJobTest extends BaseJob {
       ))).build()
 
     // Config collection pageview_dd_timestamp
-    val imConf = configBuilder(JobSetting.rawConnection, rawDB, pageViewColl)
+    val pageViewConf = configBuilder(JobSetting.rawConnection, rawDB, pageViewColl)
 
     // Loading ad_unit collection into DataFrame
     val adUnitDF = sqlContext.fromMongoDB(adUnitConf)
@@ -84,19 +84,14 @@ object ImpressionJobTest extends BaseJob {
       .withColumnRenamed("code", "bdCode")
       .withColumnRenamed("publisher", "bdPublisher")
       .select("bdCode", "bdPublisher", "ref_id")
-    val impressionDF = sqlContext.fromMongoDB(imConf, Some(ImpressionLog.schema)).filter(col("delayed") === 0)
+
+    val pageViewDF = sqlContext.fromMongoDB(pageViewConf, Some(ImpressionLog.schema)).filter(col("delayed") === 0)
 
     /*
   * Processing for main widgetId
   * */
-    val allAdunitDF = adUnitLogDF.join(adUnitDF, col("adunit_key") === col("key") && col("adUnitLogActive") === true && col("adUnitActive") === true)
-    val bdDataOtherPublisher = impressionDF
-      .join(allAdunitDF, col("widgetId") === col("widget_id"))
-      .groupBy(col("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
-        col("os"), col("device"), col("browser"), col("publisher"))
-      .agg(count(col("widgetId")).as("count"))
 
-    val bdDataMainPublisher = impressionDF
+    val bdDataMainPublisher = pageViewDF
       .join(bdDF, col("bdCode") === col("widgetId"))
       .groupBy(col("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
         col("os"), col("device"), col("browser"), col("bdPublisher").as("publisher"))
@@ -104,29 +99,19 @@ object ImpressionJobTest extends BaseJob {
 
 
     /*
-  * Processing for widget is ref_id
+  * Processing for widget has ref_id
   *
   * */
 
-    val refIdDataOtherPublisher = impressionDF
-      .join(bdDF, col("ref_id") === col("widgetId"))
-      .join(allAdunitDF, col("bdCode") === col("widget_id"))
-      .groupBy(col("bdCode").as("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
-        col("os"), col("device"), col("browser"), col("publisher"))
-      .agg(count(col("widgetId")).as("count"))
-
-    val refIdDataMainPublisher = impressionDF
+    val refIdDataDF = pageViewDF
       .join(bdDF, col("ref_id") === col("widgetId"))
       .groupBy(col("bdCode").as("widgetId"), col("url"), col("referer"), col("extras"), col("time"),
         col("os"), col("device"), col("browser"), col("bdPublisher").as("publisher"))
       .agg(count(col("widgetId")).as("count"))
 
-    val refIdDataDF = refIdDataOtherPublisher.unionAll(refIdDataMainPublisher)
-    val whereClause: String = getWhereClause
-
-    val rawInputDF = bdDataOtherPublisher.unionAll(bdDataMainPublisher)
+    val rawInputDF = bdDataMainPublisher
       .unionAll(refIdDataDF)
-      .where(whereClause)
+      .where(getWhereClause)
 
     val breakDownOsDeviceDF = rawInputDF.select(
       col("widgetId"), hourTs(col("time")).as("date"), col("extras.adunit").as("section"), col("publisher"),
@@ -142,6 +127,7 @@ object ImpressionJobTest extends BaseJob {
 
     //    get columns to order when union all
     val columns = breakDownOsDeviceOverallDF.columns.toSet.intersect(breakDownOsDeviceDF.columns.toSet).map(col).toSeq
+
     val breakDownDF = breakDownOsDeviceOverallDF.select(columns: _*).unionAll(breakDownOsDeviceDF.select(columns: _*))
 
     // Save result to brand_display_mm_yyyy
