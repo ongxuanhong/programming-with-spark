@@ -111,7 +111,11 @@ object ImpressionJobTest extends BaseJob {
 
     val overallDataDF = bdOverallDataDF
       .unionAll(refIdOverallDataDF)
-      .where(getWhereClauseWithSection(false))
+      .where(getWhereClauseWithSection())
+
+    bdOverallDataDF.show(100)
+    refIdOverallDataDF.show(100)
+    overallDataDF.show(100)
 
     val breakDownOsDeviceDF = bdDataDF.select(
       col("widgetId"), col("time").as("date"), col("section"), col("publisher"),

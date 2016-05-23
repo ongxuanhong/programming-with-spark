@@ -46,18 +46,14 @@ trait BaseJob {
   }
 
 
-  def getWhereClauseWithSection(allSection : Boolean = true) : String = {
+  def getWhereClauseWithSection() : String = {
     var whereClause: String = "os IS NOT NULL " +
-      "AND browser IS NOT NULL " +
+//      "AND browser IS NOT NULL " +
       "AND device IS NOT NULL " +
       "AND url NOT LIKE 'file%' " +
       "AND url NOT LIKE 'http://localhost%' " +
       "AND url NOT LIKE 'https://localhost%'" +
       s"AND time >= $startEpoch AND time < $endEpoch "
-
-    if(allSection) {
-      whereClause += "AND section IS NOT NULL "
-    }
 
     if (widgetIds.nonEmpty) {
       if (widgetIds.length == 1) {
