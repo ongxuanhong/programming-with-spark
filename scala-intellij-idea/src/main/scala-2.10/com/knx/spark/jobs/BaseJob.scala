@@ -52,17 +52,17 @@ trait BaseJob {
       "AND device IS NOT NULL " +
       "AND url NOT LIKE 'file%' " +
       "AND url NOT LIKE 'http://localhost%' " +
-      "AND url NOT LIKE 'https://localhost%'" +
-      s"AND time >= $startEpoch AND time < $endEpoch "
-
-    if (widgetIds.nonEmpty) {
-      if (widgetIds.length == 1) {
-        whereClause += s" AND widgetId = '" + widgetIds(0) + "'"
-      }
-      else {
-        whereClause += " AND widgetId IN (" + widgetIds.mkString("'", "','", "'") + ")"
-      }
-    }
+      "AND url NOT LIKE 'https://localhost%' "
+//      s"AND time >= $startEpoch AND time < $endEpoch "
+//
+//    if (widgetIds.nonEmpty) {
+//      if (widgetIds.length == 1) {
+//        whereClause += s" AND widgetId = '" + widgetIds(0) + "'"
+//      }
+//      else {
+//        whereClause += " AND widgetId IN (" + widgetIds.mkString("'", "','", "'") + ")"
+//      }
+//    }
     whereClause
   }
 

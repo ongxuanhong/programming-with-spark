@@ -4,7 +4,7 @@ package com.knx.spark
   * Created by hongong on 4/29/16.
   */
 
-import com.knx.spark.jobs.{ImpressionJobTest, JobSetting}
+import com.knx.spark.jobs.{ImpressionJob, JobSetting}
 import com.knx.spark.utils.CommandRunUtils
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.SQLContext
@@ -38,7 +38,7 @@ object MainExecutor extends App {
       utcEpoch = utcDate.getMillis / 1000
       startEpoch = startDate.getMillis / 1000
 
-      ImpressionJobTest
+      ImpressionJob
         .setDate(utcDate)
         .setWidgetIds(widgetIds)
         .process(sqlContext)
@@ -48,6 +48,6 @@ object MainExecutor extends App {
       utcDate = utcDate.plusHours(1)
     }
 
-    ImpressionJobTest.stopProgress(sc)
+    ImpressionJob.stopProgress(sc)
   }
 }

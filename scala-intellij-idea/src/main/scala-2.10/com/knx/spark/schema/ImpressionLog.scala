@@ -32,9 +32,6 @@ object ImpressionLog {
         StructField("guid", StringType, true) ::
         StructField("others", StringType, true) :: Nil
     ))
-    //    val os = structField(self.os, StringType)
-    //    val device = structField(self.device, StringType)
-    //    val browser = structField(self.browser, StringType)
     val os = structField(self.os, StructType(
       StructField("family", StringType, true) ::
         StructField("major", StringType, true) ::

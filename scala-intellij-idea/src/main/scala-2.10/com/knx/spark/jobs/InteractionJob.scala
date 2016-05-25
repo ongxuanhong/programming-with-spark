@@ -4,7 +4,6 @@ package com.knx.spark.jobs
   * Created by hongong on 5/3/16.
   */
 
-import com.knx.spark.schema.ImpressionLog
 import com.stratio.datasource.mongodb._
 import com.stratio.datasource.mongodb.config.MongodbConfig._
 import com.stratio.datasource.mongodb.config.MongodbConfigBuilder
@@ -13,7 +12,7 @@ import org.apache.spark.SparkContext
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.functions.{udf, _}
 
-object ImpressionJobTest extends BaseJob {
+object InteractionJob extends BaseJob {
 
   /*
   * Default settings
@@ -83,6 +82,7 @@ object ImpressionJobTest extends BaseJob {
 
     val pageViewDF = sqlContext.fromMongoDB(pageViewConf)
       .filter(col("delayed") === 0)
+        .select("widgetId", "url", "referer", "section", "time", "os", "device", "browser")
       .where(filterByWidgetId("widgetId"))
 
     /*
@@ -90,7 +90,7 @@ object ImpressionJobTest extends BaseJob {
   * */
 
     // get all section
-    val bdDataDF = pageViewDF
+    val bdTotalDataDF = pageViewDF
       .join(allWidgetDF, col("bdCode") === col("widgetId"))
       .groupBy(col("widgetId"), col("url"), col("referer"), col("section"), hourTs(col("time")).as("time"),
         col("os"), col("device"), col("browser"), col("bdPublisher").as("publisher"))
@@ -113,11 +113,7 @@ object ImpressionJobTest extends BaseJob {
       .unionAll(refIdOverallDataDF)
       .where(getWhereClauseWithSection())
 
-    bdOverallDataDF.show(100)
-    refIdOverallDataDF.show(100)
-    overallDataDF.show(100)
-
-    val breakDownOsDeviceDF = bdDataDF.select(
+    val breakDownOsDeviceDF = bdTotalDataDF.select(
       col("widgetId"), col("time").as("date"), col("section"), col("publisher"),
       col("os"), col("device"), col("browser"), col("count"))
       .groupBy("widgetId", "date", "publisher", "section", "os", "device", "browser")
