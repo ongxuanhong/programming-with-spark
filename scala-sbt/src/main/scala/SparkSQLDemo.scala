@@ -1,18 +1,20 @@
-/**
-  * Created by hongong on 4/23/16.
-  */
+import org.apache.spark.sql.SparkSession
 
-import org.apache.spark._
-import org.apache.spark.SparkContext
-import org.apache.spark.sql.SQLContext
+/**
+  * Created by hongong on 3/07/17.
+  */
 
 object SparkSQLDemo {
   def main(args: Array[String]) {
 
-    val conf = new SparkConf().setAppName("Spark SQL Application").setMaster("local[2]")
-    val sc = new SparkContext(conf)
-    val sqlContext = new SQLContext(sc)
-    val df = sqlContext.read.json("people.json")
+    val sparkSession = SparkSession.builder.
+      master("local")
+      .appName("Spark SQL Demo")
+      .getOrCreate()
+
+    val sqlContext = sparkSession.sqlContext
+//    val filePath = getClass.getResource("people.json").getPath
+    val df = sqlContext.read.json("./classes/people.json")
 
     // Displays the content of the DataFrame to stdout
     df.show()

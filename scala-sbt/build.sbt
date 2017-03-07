@@ -1,43 +1,28 @@
-name := "programming with spark"
+name := "programming_with_spark"
 
 version := "1.0"
 
-scalaVersion := "2.10.5"
-
-unmanagedJars in Compile ++= Seq(
-  file("lib/mongo-hadoop-core-1.5.2.jar"),
-  file("lib/mongo-hadoop-spark-1.5.2.jar"),
-  file("lib/mongo-java-driver-3.2.2.jar")
-)
+scalaVersion := "2.11.8"
 
 libraryDependencies ++= Seq(
-  "org.apache.spark" % "spark-core_2.10" % "1.6.1",
-  "org.apache.spark" % "spark-sql_2.10" % "1.6.1"
+  "org.apache.spark" %% "spark-core" % "2.1.0" % "provided",
+  "org.apache.spark" %% "spark-streaming" % "2.1.0" % "provided",
+  "org.apache.spark" %% "spark-sql" % "2.1.0"
 )
-
-resolvers ++= Seq(
-  "Local Maven Repository" at "file://" + Path.userHome.absolutePath + "/.m2/repository",
-  "JBoss Repository" at "http://repository.jboss.org/nexus/content/repositories/releases/",
-  "Spray Repository" at "http://repo.spray.cc/",
-  "Cloudera Repository" at "https://repository.cloudera.com/artifactory/cloudera-repos/",
-  "Akka Repository" at "http://repo.akka.io/releases/",
-  "Twitter4J Repository" at "http://twitter4j.org/maven2/",
-  "Apache HBase" at "https://repository.apache.org/content/repositories/releases",
-  "Twitter Maven Repo" at "http://maven.twttr.com/",
-  "scala-tools" at "https://oss.sonatype.org/content/groups/scala-tools",
-  "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/",
-  "Second Typesafe repo" at "http://repo.typesafe.com/typesafe/maven-releases/",
-  "Mesosphere Public Repository" at "http://downloads.mesosphere.io/maven",
-  "Job Server Bintray" at "https://dl.bintray.com/spark-jobserver/maven",
-  "Sonatype OSS Releases" at "https://oss.sonatype.org/content/repositories/releases/",
-  Resolver.sonatypeRepo("public")
-)
-
-// set an explicit main class
-mainClass in assembly := Some("com.knx.spark.MainExecutor")
 
 // Configure JAR used with the assembly plug-in
-assemblyJarName in assembly := "spark_aggregate_os.jar"
+assemblyJarName in assembly := "programming_with_spark.jar"
+
+// A special option to exclude Scala itself form our assembly JAR, since Spark // already bundles Scala.
+assemblyOption in assembly :=
+  (assemblyOption in assembly).value.copy(includeScala = false)
+
+resolvers ++= Seq(
+  Resolver.sonatypeRepo("public"),
+  Resolver.typesafeRepo("releases")
+)
+
+assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false, includeDependency = false)
 
 assemblyMergeStrategy in assembly := {
   case m if m.toLowerCase.endsWith("manifest.mf") => MergeStrategy.discard
@@ -50,3 +35,4 @@ assemblyMergeStrategy in assembly := {
   case "logback.xml" => MergeStrategy.concat
   case _ => MergeStrategy.first
 }
+
