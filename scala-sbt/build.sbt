@@ -5,9 +5,12 @@ version := "1.0"
 scalaVersion := "2.11.8"
 
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % "2.1.0" % "provided",
-  "org.apache.spark" %% "spark-streaming" % "2.1.0" % "provided",
-  "org.apache.spark" %% "spark-sql" % "2.1.0"
+  "org.apache.spark" %% "spark-core" % "2.3.0" % "provided",
+  "org.apache.spark" %% "spark-streaming" % "2.3.0" % "provided",
+  "org.apache.spark" %% "spark-sql" % "2.3.0" % "provided",
+  "org.apache.spark" %% "spark-mllib" % "2.3.0" % "provided",
+  "ml.dmlc" % "xgboost4j" % "0.8-wmf-1",
+  "ml.dmlc" % "xgboost4j-spark" % "0.8-wmf-1"
 )
 
 // Configure JAR used with the assembly plug-in
@@ -18,9 +21,12 @@ assemblyOption in assembly :=
   (assemblyOption in assembly).value.copy(includeScala = false)
 
 resolvers ++= Seq(
+  DefaultMavenRepository,
   Resolver.sonatypeRepo("public"),
   Resolver.typesafeRepo("releases")
 )
+//resolvers += "GitHub Repo" at "https://raw.githubusercontent.com/CodingCat/xgboost/maven-repo/"
+resolvers += "Maven Repo" at "https://archiva.wikimedia.org/repository/releases/"
 
 assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false, includeDependency = false)
 
